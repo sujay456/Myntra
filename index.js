@@ -12,6 +12,7 @@ const port = 8000
 // app.use(expressLayouts)
 
 app.use(express.static(path.join(__dirname, '/assets')));
+app.use(expressLayouts); 
 
 app.set('view engine', 'ejs');
 app.set('views', './views');
