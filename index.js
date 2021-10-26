@@ -9,7 +9,9 @@ const port = 8000
 // this is a comment by sujay
 // this is a comment by jatin
 
-// app.use(expressLayouts)
+app.use(expressLayouts)
+app.set('layout extractStyles', true);
+app.set('layout extractScripts', true);
 
 app.use(express.static(path.join(__dirname, '/assets')));
 

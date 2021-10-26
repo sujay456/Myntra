@@ -1,4 +1,4 @@
 module.exports.home = (req, res) => {
 
-    return res.render('login_page')
+    return res.render('login_page', { extractScripts: true })
 }
