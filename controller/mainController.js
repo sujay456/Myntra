@@ -1,4 +1,11 @@
 module.exports.home = (req, res) => {
+    return res.render('home');
+}
 
-    return res.render('login_page', { extractScripts: true })
+module.exports.login = (req, res) => {
+    return res.render('login_page');
+}
+
+module.exports.product = (req, res) => {
+    return res.render('product');
 }
