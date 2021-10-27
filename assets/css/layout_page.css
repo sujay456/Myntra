@@ -8,10 +8,6 @@ body{
     font-family: 'Poppins',sans-serif;
 }
 
-.full-body{
-    min-height: 100vh;
-}
-
 .navbar{
     display: flex;
     align-items: center;
@@ -56,6 +52,9 @@ p{
     text-align: center;
     justify-content: space-around;
     background: black;
+    height: 50px;
+    position:fixed;
+    bottom:0;
 }
 
 .footer p{

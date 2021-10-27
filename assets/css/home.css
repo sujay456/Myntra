@@ -10,7 +10,17 @@
 
 .col-2{
     flex-basis: 50%;
+    width: 500px;
+}
+
+.featured-image{
+    flex-basis: 50%;
     min-width: 500px;
+}
+
+.featured-image img{
+    max-width: 100%;
+    padding: 50px 0;
 }
 
 .col-2 img{
@@ -66,6 +76,7 @@
 .small-container{
     max-width: 1080px;
     margin: auto;
+    margin-bottom: 50px;
     padding: 0 25px;
 }
 
@@ -122,4 +133,32 @@ h6{
 
 .col-4:hover{
     transform: translateY(-5px);
+}
+
+@media only screen and (max-width:600px){
+    .row, .row-2{
+        text-align: center;
+    }
+    .col-2, .col-3, .col-4{
+        flex-basis: 100%;
+    }
+    .single-product .row{
+        text-align: left;
+    }
+    .single-product .col-2{
+        padding: 20px 0;
+    }
+    .single-product h1{
+        font-size: 26px;
+        line-height: 32px;
+    }
+}
+
+@media only screen and (max-width:850px){
+    .featured-image,.featured-text{
+        width: 0;
+        height: 0;
+        min-width: none;
+        display: none;
+    }
 }

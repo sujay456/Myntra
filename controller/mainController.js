@@ -19,7 +19,9 @@ module.exports.signup = (req, res) => {
     return res.render('signup_page');
 }
 
-
+module.exports.cart = (req,res) => {
+    return res.render('cart');
+}
 
 // for registeration
 module.exports.create = async (req, res) => {
