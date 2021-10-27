@@ -26,6 +26,7 @@ nav{
 nav ul{
     display: inline-block;
     list-style-type: none;
+    padding-top: 10px;
 }
 
 nav ul li{
@@ -46,7 +47,7 @@ p{
     max-width: 1300px;
     margin: auto;
     padding: 0 25px;
-}
+} 
 
 .footer{
     margin:0;
@@ -62,3 +63,4 @@ p{
     padding: 15px 0 5px;
     color: white;
 }
+
