@@ -10,17 +10,7 @@
 
 .col-2{
     flex-basis: 50%;
-    width: 500px;
-}
-
-.featured-image{
-    flex-basis: 50%;
     min-width: 500px;
-}
-
-.featured-image img{
-    max-width: 100%;
-    padding: 50px 0;
 }
 
 .col-2 img{
@@ -76,8 +66,8 @@
 .small-container{
     max-width: 1080px;
     margin: auto;
-    margin-bottom: 50px;
     padding: 0 25px;
+    margin-bottom: 50px;
 }
 
 .col-4{
@@ -154,11 +144,14 @@ h6{
     }
 }
 
-@media only screen and (max-width:850px){
-    .featured-image,.featured-text{
-        width: 0;
-        height: 0;
-        min-width: none;
-        display: none;
+@media only screen and (max-width:510px){
+    .col-2{
+        min-width: 100%;
+    }
+}
+
+@media only screen and (max-width:250px){
+    .col-3, .col-4{
+        min-width: 100%;
     }
 }
