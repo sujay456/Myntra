@@ -46,6 +46,8 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 1;
+    background: linear-gradient(45deg,rgba(241,115,31,0.9),rgba(253,0,206,0.8));
 }
 
 .nav-item {
