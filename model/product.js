@@ -20,7 +20,7 @@ const ProducSchema = new mongoose.Schema({
     },
     image:
     {
-        typr: String
+        type: String
     }
 },
     {

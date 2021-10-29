@@ -12,7 +12,7 @@ module.exports.home = async (req, res) => {
 
         if (!productDB.length) {
             for (let x of products) {
-                await Product.create({ name: x['name'], price: x['price'], Desc: x['desc'], rating: x['rating'] })
+                await Product.create({ name: x['name'], price: x['price'], Desc: x['desc'], rating: x['rating'], image: x['image'] })
             }
         }
 
