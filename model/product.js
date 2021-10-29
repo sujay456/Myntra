@@ -21,7 +21,12 @@ const ProducSchema = new mongoose.Schema({
     image:
     {
         type: String
-    }
+    },
+    gallery: [
+        {
+            type: String
+        }
+    ]
 },
     {
         timestamps: true
