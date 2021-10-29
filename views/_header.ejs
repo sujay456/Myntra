@@ -3,10 +3,10 @@
         <a href="#" class="nav-logo"><img src="images/logo.png" width="150px"></a>
         <ul class="nav-menu">
             <li class="nav-item">
-                <a href="#" class="nav-link">Home</a>
+                <a href="/" class="nav-link">Home</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">Products</a>
+                <a href="/product" class="nav-link">Products</a>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">About</a>
@@ -14,11 +14,18 @@
             <li class="nav-item">
                 <a href="#" class="nav-link">Contact</a>
             </li>
+
             <li class="nav-item">
-                <a href="#" class="nav-link">Account</a>
+                <% if(locals.user){%>
+                    <a href="#" class="nav-link">
+                        <%=locals.user.name%>
+                    </a>
+                    <% }else{%>
+                        <a href="#" class="nav-link">Account</a>
+                        <%}%>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link"><img src="images/cart.png" width="25px" height="25px"></a>
+                <a href="/cart" class="nav-link"><img src="images/cart.png" width="25px" height="25px"></a>
             </li>
         </ul>
         <div class="hamburger">
