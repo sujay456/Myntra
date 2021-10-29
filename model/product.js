@@ -3,20 +3,24 @@ const mongoose = require('mongoose');
 const ProducSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true,
+        required: true
     },
     price: {
         type: Number,
-        required: true,
+        required: true
     },
     rating:
     {
-        type: Decimal128,
-        required: true,
+        type: Number,
+        required: true
     },
     Desc:
     {
         type: String
+    },
+    image:
+    {
+        typr: String
     }
 },
     {

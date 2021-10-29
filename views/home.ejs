@@ -34,53 +34,22 @@
 <div class="small-container">
     <h2 class="title">Featured Products</h2>
     <div class="row-2">
-        <div class="col-4">
-            <img src="images/product-1.jpg">
-            <h6>Red Printed T-Shirt</h6>
-            <div class="rating">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="far fa-star"></i>
+        <% for(p of locals.products){%>
+            <div class="col-4">
+                <img src="images/<%=p.image%>">
+                <h6>
+                    <%=p.name%>
+                </h6>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+                <p>₹<%=p.price%>.00</p>
             </div>
-            <p>$50.00</p>
-        </div>
-        <div class="col-4">
-            <img src="images/product-2.jpg">
-            <h6>HRX Black Shoes</h6>
-            <div class="rating">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-                <i class="far fa-star"></i>
-            </div>
-            <p>$60.00</p>
-        </div>
-        <div class="col-4">
-            <img src="images/product-3.jpg">
-            <h6>Comfortable Gray Pants</h6>
-            <div class="rating">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-            </div>
-            <p>$65.00</p>
-        </div>
-        <div class="col-4">
-            <img src="images/product-4.jpg">
-            <h6>Plain Navy Blue T-Shirt</h6>
-            <div class="rating">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="far fa-star"></i>
-            </div>
-            <p>$55.00</p>
-        </div>
+            <%}%>
+
     </div>
 </div>
