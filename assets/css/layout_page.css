@@ -19,6 +19,8 @@ a {
 .header{
     padding: 0 5%;
     border-bottom: 1px solid #E2E8F0;
+    /* position: fixed; */
+    background-color: white;
 }
 
 .navbar {
@@ -46,8 +48,7 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 1;
-    background: linear-gradient(45deg,rgba(241,115,31,0.9),rgba(253,0,206,0.8));
+    
 }
 
 .nav-item {
@@ -88,10 +89,18 @@ a {
         border-radius: 10px;
         text-align: center;
         transition: 0.3s;
+        /* overflow-y: hidden;
+         */
+        
+        background: linear-gradient(45deg,rgba(241,115,31,0.9),rgba(253,0,206,1));
+        z-index: 1;
         box-shadow:
-            0 10px 27px rgba(0, 0, 0, 0.05);
+            0 10px 27px rgba(190, 171, 171, 0.05);
     }
-
+    main
+    {
+        overflow: hidden;
+    }
     .nav-menu.active {
         left: 0;
     }
@@ -137,4 +146,3 @@ a {
     padding: 15px 0 5px;
     color: white;
 }
-
