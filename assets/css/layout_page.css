@@ -20,6 +20,7 @@ a {
     padding: 0 5%;
     border-bottom: 1px solid #E2E8F0;
     /* position: fixed; */
+    background-color: white;
 }
 
 .navbar {

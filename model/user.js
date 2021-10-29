@@ -13,6 +13,15 @@ const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
+    },
+    products: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Product'
+        }
+    ],
+    points: {
+        type: Number
     }
 },
     {

@@ -19,7 +19,7 @@ module.exports.signup = (req, res) => {
     return res.render('signup_page');
 }
 
-module.exports.cart = (req,res) => {
+module.exports.cart = (req, res) => {
     return res.render('cart');
 }
 
@@ -49,4 +49,12 @@ module.exports.create = async (req, res) => {
 module.exports.createSession = (req, res) => {
     console.log(`logged in as ${req.user.name}`);
     return res.redirect('/');
+}
+
+module.exports.signout = (req, res) => {
+
+    req.logout();
+    res.clearCookie('myntra');
+    console.log("Logged out");
+    res.redirect('/login');
 }
