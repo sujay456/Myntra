@@ -109,12 +109,22 @@ module.exports.addItem = async (req,res) => {
             image: productToAdd.image,
             quantity: 1,
         });
-        cartDB = await Cart.find({}); 
-        console.log(cartDB);
-        return res.render('cart',{cart:cartDB}); 
+        //cartDB = await Cart.find({}); 
+        //console.log(cartDB);
+        return res.redirect('/cart'); 
     }catch(error){
         console.log("Error in adding item to cart (mainController)");
         console.log(error);
     }
 
+}
+
+// for removing items from cart
+module.exports.deleteItem = async (req,res) => {
+    Cart.findByIdAndRemove(req.query.id, function(err,deleted){
+        if(err){
+            console.log(err);
+        }
+    }); 
+    return res.redirect('/cart');
 }

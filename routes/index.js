@@ -10,6 +10,7 @@ router.get('/product', mainController.product);
 router.get('/signup', mainController.signup);
 router.get('/cart', mainController.cart);
 router.get('/add-item', mainController.addItem); 
+router.get('/delete-item', mainController.deleteItem); 
 router.get('/profile', mainController.profile);
 router.get('/logout', mainController.signout);
 

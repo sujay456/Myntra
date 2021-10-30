@@ -14,7 +14,7 @@
                     <div>
                         <p><%=p.name%></p>
                         <small>₹<%=p.price%>.00</small>
-                        <a href="">Remove</a>
+                        <a href="" class="remove-from-cart" data-product="<%= p.id %>">Remove</a>
                     </div>
                 </div>
             </td>
@@ -44,3 +44,5 @@
     </div>
 
 </div>
+
+<script src="js/cart.js"></script>
