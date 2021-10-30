@@ -1,0 +1,59 @@
+.container-1{
+    margin-left: 4%;
+    width: 30%;
+    display: inline-block;
+}
+
+.container-2{
+    width: 60%;
+    display: inline-block;
+    margin-left: -5%;
+}
+
+h4{
+    padding:25px 25px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 50%;
+    min-width: 300px;
+    margin-left:7.5%;
+}
+  
+th, td {
+    padding: 15px 8px;
+    text-align: left;
+}
+
+table i{
+    color: rgb(255, 174, 0);
+}
+  
+.past-order{
+    width: 90%;
+    margin: 0 0 150px 7.5%;
+}
+
+.past-order th, .past-order td{
+    width: 1110px;
+    text-align: center;
+}
+
+.past-order tr:hover{
+    background: linear-gradient(45deg,rgba(241,115,31,0.3),rgba(253,0,206,0.3));
+}
+
+@media only screen and (max-width: 1200px) {
+    .container-2{
+        margin-left: 0;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .container-1,.container-2{
+        display: block;
+    }.container-2{
+        margin-left: 2.5%;
+    }
+}
