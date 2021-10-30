@@ -5,3 +5,11 @@ function changeImage(element) {
 
 
 }
+
+$('.add-to-cart').on('click', function (event) {
+
+    console.log(event.target.dataset.product);
+
+    window.location.href = `/add-item?id=${event.target.dataset.product}`;
+
+}) 

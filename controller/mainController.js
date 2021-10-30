@@ -1,5 +1,6 @@
 const User = require('../model/user');
 const Product = require('../model/product');
+const Cart = require('../model/cart');
 module.exports.home = async (req, res) => {
 
     try {
@@ -50,8 +51,9 @@ module.exports.signup = (req, res) => {
     return res.render('signup_page');
 }
 
-module.exports.cart = (req, res) => {
-    return res.render('cart');
+module.exports.cart = async (req, res) => {
+    cartDB = await Cart.find({}); 
+    return res.render('cart',{cart:cartDB}); 
 }
 
 // for registeration
@@ -92,4 +94,27 @@ module.exports.signout = (req, res) => {
 
 module.exports.profile = (req,res) => {
     res.render('profile');
+}
+
+// for adding items into cart
+module.exports.addItem = async (req,res) => {
+    
+    try{
+        await Cart.deleteMany({productId:req.query.id});
+        let productToAdd = await Product.findById(req.query.id); 
+        await Cart.create({ 
+            productId: productToAdd._id,
+            name: productToAdd.name, 
+            price: productToAdd.price, 
+            image: productToAdd.image,
+            quantity: 1,
+        });
+        cartDB = await Cart.find({}); 
+        console.log(cartDB);
+        return res.render('cart',{cart:cartDB}); 
+    }catch(error){
+        console.log("Error in adding item to cart (mainController)");
+        console.log(error);
+    }
+
 }

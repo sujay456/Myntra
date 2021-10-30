@@ -6,48 +6,23 @@
             <th>Quantity</th>
             <th>Subtotal</th>
         </tr>
+        <% for(p of cart){ %>
         <tr>
             <td>
                 <div class="cart-info">
-                    <img src="images/buy-1.jpg">
+                    <img src="images/<%=p.image%>">
                     <div>
-                        <p>Red Printed Tshirt</p>
-                        <small>Price: $50.00</small>
+                        <p><%=p.name%></p>
+                        <small>₹<%=p.price%>.00</small>
                         <a href="">Remove</a>
                     </div>
                 </div>
             </td>
-            <td><input type="number" value="1"></td>
+            <td><%=p.quantity%></td>
             <td>$50.00</td>
         </tr>
-        <tr>
-            <td>
-                <div class="cart-info">
-                    <img src="images/buy-2.jpg">
-                    <div>
-                        <p>HRX Black Shoes</p>
-                        <small>Price: $60.00</small>
-                        <a href="">Remove</a>
-                    </div>
-                </div>
-            </td>
-            <td><input type="number" value="1"></td>
-            <td>$60.00</td>
-        </tr>
-        <tr>
-            <td>
-                <div class="cart-info">
-                    <img src="images/buy-3.jpg">
-                    <div>
-                        <p>Comfortable Gray Pants</p>
-                        <small>Price: $65.00</small>
-                        <a href="">Remove</a>
-                    </div>
-                </div>
-            </td>
-            <td><input type="number" value="1"></td>
-            <td>$65.00</td>
-        </tr>
+        <% }%>
+        
     </table>
 
 

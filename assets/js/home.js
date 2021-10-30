@@ -4,4 +4,4 @@ $('.product-preview').on('click', function (event) {
 
     window.location.href = `/product?id=${event.target.dataset.product}`;
 
-})
+}) 

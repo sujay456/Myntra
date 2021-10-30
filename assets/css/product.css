@@ -1,3 +1,8 @@
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
     background-color: #ff3e6c !important;
 }
+
+.product-page-margin{
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
