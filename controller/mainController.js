@@ -89,3 +89,7 @@ module.exports.signout = (req, res) => {
     console.log("Logged out");
     res.redirect('/login');
 }
+
+module.exports.profile = (req,res) => {
+    res.render('profile');
+}

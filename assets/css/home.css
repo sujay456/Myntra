@@ -63,6 +63,10 @@
     width: 100%;
 }
 
+p i{
+    color: rgb(255, 174, 0);
+}
+
 .small-container{
     max-width: 1080px;
     margin: auto;
@@ -123,6 +127,18 @@ h6{
 
 .col-4:hover{
     transform: translateY(-5px);
+}
+
+.background-myntra{
+    margin-left:0;
+    margin-right: 0;
+    margin-bottom: 150px;
+    background: linear-gradient(45deg,rgba(241,115,31,0.9),rgba(253,0,206,0.8));
+    padding-top: 50px;
+}
+
+.background-myntra h2,.background-myntra h6{
+    color: black;
 }
 
 @media only screen and (max-width:600px){

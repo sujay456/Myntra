@@ -61,7 +61,7 @@ a {
     color: #475569;
     margin-top: 12.5px;
 }
-
+ 
 .nav-link:hover{
     color: #482ff7;
 }
@@ -72,6 +72,16 @@ a {
     color: #482ff7;
 }
 
+.navbar-content{
+    display: none;
+}
+
+.navbar-content-margin{
+    display: block;
+    height: 1px;
+    margin-top: 800px;
+}
+
 @media only screen and (max-width: 1200px){
     .header{
         padding: 0;
@@ -80,22 +90,17 @@ a {
 
 @media only screen and (max-width: 1000px) {
     .nav-menu {
-        position: fixed;
+        position: absolute;
         left: -100%;
-        top: 7rem;
+        top: 5rem;
         flex-direction: column;
-        background-color: #fff;
         width: 100%;
         border-radius: 10px;
         text-align: center;
         transition: 0.3s;
-        /* overflow-y: hidden;
-         */
-        
-        background: linear-gradient(45deg,rgba(241,115,31,0.9),rgba(253,0,206,1));
-        z-index: 1;
-        box-shadow:
-            0 10px 27px rgba(190, 171, 171, 0.05);
+        background: linear-gradient(45deg,rgba(241,115,31,1),rgba(253,0,206,1));
+        z-index: 2;
+        box-shadow: 0 10px 27px rgba(190, 171, 171, 0.05);
     }
     main
     {
@@ -112,6 +117,7 @@ a {
     .hamburger {
         display: block;
         cursor: pointer;
+        z-index: 2;
     }
 
     .hamburger.active .bar:nth-child(2) {
@@ -128,6 +134,46 @@ a {
         transform: translateY(-8px) rotate(-45deg);
     }
 }
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 350px;
+    left:-150px;
+    top:40px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    padding:20px;
+    color: black;
+}
+  
+.dropdown-content p{
+    font-size: 0.95rem;
+    color: gray;
+}
+
+.dropdown-content a {
+    color: rgba(253,0,206,1);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 1rem;
+    letter-spacing: 0.08rem;
+    font-weight: bolder;
+}
+
+.dropdown-content button{
+    background-color: white;
+    border: 1px solid lightgray;
+}
+  
+.dropdown:hover .dropdown-content {display: block;}
 
 .footer{
     margin:0;

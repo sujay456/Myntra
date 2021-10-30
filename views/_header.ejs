@@ -16,14 +16,22 @@
             </li>
 
             <li class="nav-item">
-                <% if(locals.user){%>
+                <% if(locals.user){%> 
                     <a href="#" class="nav-link">
                         <%=locals.user.name%>
                     </a>
                     <% }else{%>
-                        <a href="#" class="nav-link">Account</a>
-                        <%}%>
-            </li>
+                        <div class="dropdown nav-link">Account
+                            <div class="dropdown-content">
+                                <b>Welcome</b>
+                                <p>To access account and manage orders</p>
+                                <button>
+                                    <a href="/login">LOGIN / SIGNUP</a>
+                                </button>
+                            </div>
+                        </div>
+                    <%}%>
+            </li> 
             <li class="nav-item">
                 <a href="/cart" class="nav-link"><img src="images/cart.png" width="25px" height="25px"></a>
             </li>
@@ -34,4 +42,5 @@
             <span class="bar"></span>
         </div>
     </nav>
+    <div id="navbar-content-div" class="navbar-content"></div>
 </header>
