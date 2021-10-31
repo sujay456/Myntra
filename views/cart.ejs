@@ -1,11 +1,13 @@
 <link rel="stylesheet" href="css/cart.css">
 <div class="small-container cart-page">
+    <% if(cart.length != 0){ %>
     <table>
         <tr>
             <th>Product</th>
             <th>Quantity</th>
             <th>Subtotal</th>
         </tr>
+        <% let totalPrice = 0; %>
         <% for(p of cart){ %>
         <tr>
             <td>
@@ -18,8 +20,13 @@
                     </div>
                 </div>
             </td>
-            <td><%=p.quantity%></td>
-            <td>$50.00</td>
+            <td>
+                <button class="handle-quantity decreaseQuantity" data-product="<%= p.id %>">-</button>
+                <%=p.quantity%>
+                <button class="handle-quantity increaseQuantity" data-product="<%= p.id %>">+</button>
+            </td>
+            <td>₹<%= p.price*p.quantity %>.00</td>
+            <% totalPrice = totalPrice + p.price*p.quantity %>
         </tr>
         <% }%>
         
@@ -30,17 +37,23 @@
         <table>
             <tr>
                 <td>Subtotal</td>
-                <td>$175.00</td>
+                <td>₹<%= totalPrice %>.00</td>
             </tr>
             <tr>
                 <td>Tax</td>
-                <td>$30.00</td>
+                <td>₹<%= (0.18*totalPrice).toFixed(2) %></td>
             </tr>
             <tr>
                 <td>Total</td>
-                <td>$205.00</td>
+                <td>₹<%= ((0.18*totalPrice) + totalPrice).toFixed(2) %></td>
             </tr>
         </table>
+        <% }else{ %>
+            <div class="empty-cart">
+                <img src="images/emptycart.png">
+                <a href="/"><button type="button" class="btn btn-light shop-now-button">Shop Now !!</button></a>
+            </div>
+    <%}%>
     </div>
 
 </div>

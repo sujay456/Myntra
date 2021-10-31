@@ -128,3 +128,32 @@ module.exports.deleteItem = async (req,res) => {
     }); 
     return res.redirect('/cart');
 }
+
+module.exports.increaseQuantity = async (req,res) => {
+    console.log("Hello!");
+    let productToUpdate = await Cart.findById(req.query.id); 
+    Cart.findByIdAndUpdate(req.query.id, {quantity:productToUpdate.quantity+1} ,function(err,updated){
+        if(err){
+            console.log(err);
+        }
+    });
+    return res.redirect('/cart');
+}
+
+module.exports.decreaseQuantity = async (req,res) => {
+    let productToUpdate = await Cart.findById(req.query.id); 
+    if(productToUpdate.quantity == 1){
+        Cart.findByIdAndRemove(req.query.id, function(err,deleted){
+            if(err){
+                console.log(err);
+            }
+        }); 
+    }else{
+        Cart.findByIdAndUpdate(req.query.id, {quantity:productToUpdate.quantity-1} ,function(err,updated){
+            if(err){
+                console.log(err);
+            }
+        });
+    }
+    return res.redirect('/cart');
+}
