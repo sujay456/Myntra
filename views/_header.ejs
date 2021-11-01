@@ -32,6 +32,11 @@
                         </div>
                     <%}%>
             </li> 
+            <% if(locals.user){%>
+            <li class="nav-item">
+                <a href="#" rel="noopener noreferrer">Points <%= user.points%></a>
+            </li>
+            <%}%>
             <li class="nav-item">
                 <a href="/cart" class="nav-link"><img src="images/cart.png" width="25px" height="25px"></a>
             </li>

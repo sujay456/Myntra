@@ -64,7 +64,7 @@ module.exports.create = async (req, res) => {
         let user = await User.findOne({ email: req.body.email });
 
         if (!user) {
-            await User.create({ email: req.body.email, password: req.body.password, name: req.body.name });
+            await User.create({ email: req.body.email, password: req.body.password, name: req.body.name,points:0 });
 
             return res.redirect('/login');
         }
@@ -130,7 +130,7 @@ module.exports.deleteItem = async (req,res) => {
 }
 
 module.exports.increaseQuantity = async (req,res) => {
-    console.log("Hello!");
+    // console.log("Hello!");
     let productToUpdate = await Cart.findById(req.query.id); 
     Cart.findByIdAndUpdate(req.query.id, {quantity:productToUpdate.quantity+1} ,function(err,updated){
         if(err){
@@ -156,4 +156,34 @@ module.exports.decreaseQuantity = async (req,res) => {
         });
     }
     return res.redirect('/cart');
+}
+
+module.exports.BuyFromCart=async (req,res)=>{
+    
+    try {
+        let products=await Cart.find({})
+
+    let tot_price=0.0
+
+    for(let x of products)
+    {
+        tot_price+=(x['price']*x['quantity']);
+    }
+
+    // console.log(tot_price);
+
+    let coins_earned=parseInt(tot_price*0.05)
+
+    let user=await User.findById(req.user.id);
+
+    user.points+=coins_earned;
+    user.save();
+    // after buying the products from the cart remove all the elements from the cart
+
+    await Cart.deleteMany({})
+    return res.redirect('back');
+    } catch (error) {
+        console.log("Error in buying the products",error);
+    }
+    
 }

@@ -16,6 +16,8 @@ router.get('/increase-quantity',mainController.increaseQuantity);
 router.get('/profile', mainController.profile);
 router.get('/logout', mainController.signout);
 
+router.get('/buy',mainController.BuyFromCart);
+
 router.post('/register', mainController.create);
 
 router.post('/session', passport.authenticate(
