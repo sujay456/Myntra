@@ -66,6 +66,10 @@ a {
     color: #482ff7;
 }
 
+i{
+    color: rgb(255, 174, 0); 
+}
+
 .nav-logo {
     font-size: 1rem;
     font-weight: 500;
