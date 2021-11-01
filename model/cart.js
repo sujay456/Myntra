@@ -13,14 +13,15 @@ const CartSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    image:
-    {
+    image: {
         type: String
     },
-    quantity:
-    {
+    quantity: {
         type: Number,
         required: true
+    },user: {
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'User'
     }
 },
     {

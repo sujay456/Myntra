@@ -53,7 +53,7 @@ module.exports.signup = (req, res) => {
 }
 
 module.exports.cart = async (req, res) => {
-    cartDB = await Cart.find({}); 
+    cartDB = await Cart.find({"user":req.user._id}); 
     return res.render('cart',{cart:cartDB}); 
 }
 
@@ -109,7 +109,9 @@ module.exports.addItem = async (req,res) => {
             price: productToAdd.price, 
             image: productToAdd.image,
             quantity: 1,
+            user:req.user._id 
         });
+        //console.log(req.user._id);
         //cartDB = await Cart.find({}); 
         //console.log(cartDB);
         return res.redirect('/cart'); 
