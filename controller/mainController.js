@@ -141,6 +141,7 @@ module.exports.increaseQuantity = async (req,res) => {
 }
 
 module.exports.decreaseQuantity = async (req,res) => {
+    
     let productToUpdate = await Cart.findById(req.query.id); 
     if(productToUpdate.quantity == 1){
         Cart.findByIdAndRemove(req.query.id, function(err,deleted){

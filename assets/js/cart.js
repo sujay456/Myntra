@@ -10,6 +10,7 @@ $('.decreaseQuantity').on('click', function (event) {
 
     console.log(event.target.dataset.product);
 
+   
     window.location.href = `/decrease-quantity?id=${event.target.dataset.product}`;
 
 }) 
