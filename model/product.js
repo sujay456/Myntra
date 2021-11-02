@@ -26,7 +26,7 @@ const ProducSchema = new mongoose.Schema({
         {
             type: String
         }
-    ]
+    ],
 },
     {
         timestamps: true

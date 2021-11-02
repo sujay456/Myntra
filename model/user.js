@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
     products: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Product'
+            ref: 'Cart'
         }
     ],
     points: {

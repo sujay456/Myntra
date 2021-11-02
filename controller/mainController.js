@@ -53,7 +53,9 @@ module.exports.signup = (req, res) => {
 }
 
 module.exports.cart = async (req, res) => {
-    cartDB = await Cart.find({"user":req.user._id}); 
+    // console.log()
+    cartDB = await Cart.find({user:req.user.id,bought:false}); 
+    
     return res.render('cart',{cart:cartDB}); 
 }
 
@@ -93,27 +95,31 @@ module.exports.signout = (req, res) => {
     res.redirect('/login');
 }
 
-module.exports.profile = (req,res) => {
-    res.render('profile');
+module.exports.profile = async (req,res) => {
+
+    pastOrders=await Cart.find({user:req.user.id,bought:true})
+    // console.log(user)
+    res.render('profile',{
+        past:pastOrders
+    });
 }
 
 // for adding items into cart
 module.exports.addItem = async (req,res) => {
     
     try{
-        await Cart.deleteMany({productId:req.query.id});
+        // await Cart.deleteMany({productId:req.query.id});
         let productToAdd = await Product.findById(req.query.id); 
         await Cart.create({ 
-            productId: productToAdd._id,
+            productId: productToAdd.id,
             name: productToAdd.name, 
             price: productToAdd.price, 
             image: productToAdd.image,
             quantity: 1,
+            bought:false,
             user:req.user._id 
         });
-        //console.log(req.user._id);
-        //cartDB = await Cart.find({}); 
-        //console.log(cartDB);
+        
         return res.redirect('/cart'); 
     }catch(error){
         console.log("Error in adding item to cart (mainController)");
@@ -181,10 +187,24 @@ module.exports.BuyFromCart=async (req,res)=>{
     let user=await User.findById(req.user.id);
 
     user.points+=coins_earned;
-    user.save();
-    // after buying the products from the cart remove all the elements from the cart
 
-    await Cart.deleteMany({})
+    // after buying the products from the cart remove all the elements from the cart
+    let cart=await Cart.find({user:req.user.id,bought:false})
+    // console.log(cart)
+    if(cart)
+    {
+        for(c of cart){
+            // console.log(c._id);
+            c.bought=true;
+            user.products.push(c.id)
+            c.save();
+        }
+        // console.log(cart)
+        // cart.save();
+        
+    }
+    user.save();
+    
     return res.redirect('back');
     } catch (error) {
         console.log("Error in buying the products",error);

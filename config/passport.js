@@ -39,7 +39,7 @@ passport.deserializeUser((id, done) => {
 
 passport.CheckAuth = function (req, res, next) {
     if (req.isAuthenticated()) {
-        console.log("Authenticated");
+        // console.log("Authenticated");
         return next();
     }
 
