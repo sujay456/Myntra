@@ -6,6 +6,7 @@ const port = 8000
 const db = require('./config/mongoose');
 const passport = require('passport');
 const passportLocal = require('./config/passport');
+const passportGoogle=require('./config/passport-google');
 const session = require('express-session');
 // this is a comment by sujay
 // this is a comment by gaurav
@@ -54,3 +55,6 @@ app.listen(port, (err) => {
     }
     console.log('Runing on port 8000 ..')
 })
+
+// 729677899083-21p08k4ll0orlp8gpe1trg5342c7cahe.apps.googleusercontent.com
+// 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
