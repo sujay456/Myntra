@@ -15,6 +15,7 @@ router.get('/decrease-quantity',passport.CheckAuth,mainController.decreaseQuanti
 router.get('/increase-quantity',passport.CheckAuth,mainController.increaseQuantity); 
 router.get('/profile',passport.CheckAuth, mainController.profile);
 router.get('/logout', mainController.signout);
+router.get('/bidding_page',mainController.bidding_page);
 
 router.get('/buy',passport.CheckAuth,mainController.BuyFromCart);
 

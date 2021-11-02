@@ -1,6 +1,7 @@
 const User = require('../model/user');
 const Product = require('../model/product');
 const Cart = require('../model/cart');
+const Bidding =require('../model/bidding');
 module.exports.home = async (req, res) => {
 
     try {
@@ -16,8 +17,20 @@ module.exports.home = async (req, res) => {
             for (let x of products) {
                 await Product.create({ name: x['name'], price: x['price'], Desc: x['desc'], rating: x['rating'], image: x['image'], gallery: x['gallery'] })
             }
+            productDB=await Product.find({})
+            for(let p of productDB)
+            {
+                await Bidding.create({product:p.id,bidding_time:3,base_bid:p.price/10,curr_max_bid:p.price/10})
+            }
         }
-
+        else
+        {
+            for(let p of productDB)
+            {
+                await Bidding.create({product:p.id,bidding_time:3,base_bid:p.price/10,curr_max_bid:p.price/10})
+            }
+        }
+        
         return res.render('home', { products: productDB });
     } catch (error) {
         console.log(error);
@@ -210,4 +223,16 @@ module.exports.BuyFromCart=async (req,res)=>{
         console.log("Error in buying the products",error);
     }
     
+}
+
+module.exports.bidding_page=async (req,res)=>{
+
+    try {
+        
+
+        return res.render('bidding_page')
+    } catch (error) {
+        
+        console.log("Error in rendering bidding page");
+    }
 }
