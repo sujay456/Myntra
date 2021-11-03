@@ -7,6 +7,7 @@ const db = require('./config/mongoose');
 const passport = require('passport');
 const passportLocal = require('./config/passport');
 const passportGoogle=require('./config/passport-google');
+var bodyParser = require('body-parser');
 const session = require('express-session');
 const bidServer=require('http').Server(app);
 const bidsocket=require('./config/socket').bidSocket(bidServer);
@@ -18,7 +19,8 @@ bidServer.listen(5000);
 
 // for the req.body
 app.use(express.urlencoded({ extended: false }));
-
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressLayouts)
 app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);

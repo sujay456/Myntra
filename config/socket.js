@@ -15,11 +15,18 @@ module.exports.bidSocket=function(socketServer)
         })
         
         socket.on("online",function(data){
-            console.log("You are online now",data);
+            console.log("You are entering in the bid room",data);
             
-            socket.emit("up",{
-                online:true
-            })
+            socket.join(data.bidRoom);
+
+            io.in(data.bidRoom).emit('user_joined',{user_name:data.user_name,user_email:data.user_email});
+
+            
+        })
+
+        socket.on("placedbid",function(data){
+
+            io.in(data.room).emit('bidded',data);
         })
     })
 

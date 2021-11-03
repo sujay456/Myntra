@@ -17,22 +17,24 @@
     </div>
     <div class="bidding-details inner_container">
         <h5>Time Left : 4 min </h5>
-        <h4>Curr bid : <%=bp.curr_max_bid%></h1>
+        <h4>Curr bid : <span id="curr_bid_value"><%=bp.curr_max_bid%></span></h1>
 
         <button type="button">Place bid</button>
         
         <!-- ye wallah div upar se urta hua ayega screen pe starting pe nhi rahega -->
         <div>
-            <form action="" >
-                <input type="number" name="bid" value="1001">
-                <input type="submit" name="" id="" value="raise bid">
+            <form action="#" data-link="/bidraise" >
+                <input type="number" name="bid" value="1001" id="bid_input" >
+                <input type="submit" name="" id="bid_button" value="raise bid">
             </form>
         </div>
     </div>
     <div class="users-details inner_container">
         <h3>currently</h3>
         <div class="log-container">
-
+            <ul class="logs">
+                <!-- <li>Hello</li> -->
+            </ul>
         </div>
     </div>  
 </div>

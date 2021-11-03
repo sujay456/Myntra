@@ -20,7 +20,7 @@ module.exports.home = async (req, res) => {
             productDB=await Product.find({})
             for(let p of productDB)
             {
-                await Bidding.create({product:p.id,bidding_time:3,base_bid:p.price/10,curr_max_bid:p.price/10})
+                await Bidding.create({product:p.id,bidding_time:3,base_bid:p.price/10,curr_max_bid:parseInt( p.price/10)})
             }
         }
         
@@ -230,4 +230,31 @@ module.exports.bidding_page=async (req,res)=>{
         
         console.log("Error in rendering bidding page");
     }
+}
+
+module.exports.bidRaise=async (req,res)=>{
+
+    // console.log(req.body.value)
+    let bidP=await Bidding.findById(req.query.bidId)
+    // console.log(bidP);
+    if(bidP.curr_max_bid>=req.body.value)
+    {
+        // i am sorry babu
+        return res.status(403).json({
+            message:"forbidden"
+        })
+    }
+    else
+    {
+        bidP.curr_max_bid=req.body.value;
+        bidP.curr_winning_user=req.user.id;
+
+        bidP.save();
+
+    }
+
+
+    return res.status(200).json({
+        message:"Successfully placed the bid"
+    })
 }
