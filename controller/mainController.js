@@ -229,8 +229,9 @@ module.exports.bidding_page=async (req,res)=>{
 
     try {
         
+        product=await Product.findById(req.query.id);
 
-        return res.render('bidding_page')
+        return res.render('bidding_page',{p:product})
     } catch (error) {
         
         console.log("Error in rendering bidding page");

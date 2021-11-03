@@ -1,6 +1,39 @@
 
-<div>
-    bidding page 
+<!-- mai bas imp cheeze yaha pe daal rha hu css and structure dekh lena  -->
 
+<link rel="stylesheet" href="css/bidding.css">
+<section class="bidding">
     
+<div class="bidding_container" >
+    <div class="Product-details inner_container">
+        <h3>
+            <%=p.name%>
+    
+        </h3>
+        
+        <img src="images/<%=p.image%>" alt="product image" width="200px" >
+    
+        
+    </div>
+    <div class="bidding-details inner_container">
+        <h5>Time Left : 4 min </h5>
+        <h4>Curr_bid : 1000</h1>
+
+        <button type="button">Place bid</button>
+        
+        <!-- ye wallah div upar se urta hua ayega screen pe starting pe nhi rahega -->
+        <div>
+            <form action="" >
+                <input type="number" name="bid" value="1001">
+                <input type="submit" name="" id="" value="raise bid">
+            </form>
+        </div>
+    </div>
+    <div class="users-details inner_container">
+        <h3>currently</h3>
+        <div class="log-container">
+
+        </div>
+    </div>  
 </div>
+</section>
