@@ -8,6 +8,9 @@ const passport = require('passport');
 const passportLocal = require('./config/passport');
 const passportGoogle=require('./config/passport-google');
 const session = require('express-session');
+const bidServer=require('http').Server(app);
+const bidsocket=require('./config/socket').bidSocket(bidServer);
+bidServer.listen(5000);
 // this is a comment by sujay
 // this is a comment by gaurav
 // this is a comment by sujay
@@ -36,7 +39,7 @@ app.use(session(
         saveUninitialized: false,
         resave: true,
         cookie: {
-            maxAge: (1000 * 60 * 60)
+            maxAge: (10000 * 60 * 60)
         },
         
     }

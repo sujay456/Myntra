@@ -7,8 +7,8 @@ module.exports.home = async (req, res) => {
     try {
         
         let products = [{ name: "Red Printed T-Shirt", rating: 4, desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', price: 999, image: 'product-1.jpg', gallery: ['gallery-1.jpg', 'gallery-2.jpg'] },
-        { name: "HRX Black Shoes", rating: 3.5, desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', price: 1999, image: 'product-2.jpg', gallery: ['product-10.jpg', 'product-2.jpg'] },
-        { name: "Comfortable Gray Pant", rating: 4.5, desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', price: 4999, image: 'product-3.jpg', gallery: ['product-3.jpg', 'product-12.jpg'] },
+        { name: "HRX Black Shoes", rating: 3.5, desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', price: 1999, image: 'product-2.jpg', gallery: ['product-10.jpg', 'product-2.jpg']},
+        { name: "Comfortable Gray Pant", rating: 4.5, desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', price: 4999, image: 'product-3.jpg', gallery: ['product-3.jpg', 'product-12.jpg']},
         { name: "Plain Navy Blue T-Shirt", rating: 4.0, desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', price: 1499, image: 'product-4.jpg', gallery: ['product-4.jpg', 'product-6.jpg'] }
         ]
         productDB = await Product.find({})
@@ -23,13 +23,7 @@ module.exports.home = async (req, res) => {
                 await Bidding.create({product:p.id,bidding_time:3,base_bid:p.price/10,curr_max_bid:p.price/10})
             }
         }
-        else
-        {
-            for(let p of productDB)
-            {
-                await Bidding.create({product:p.id,bidding_time:3,base_bid:p.price/10,curr_max_bid:p.price/10})
-            }
-        }
+        
         
         return res.render('home', { products: productDB });
     } catch (error) {
@@ -229,9 +223,9 @@ module.exports.bidding_page=async (req,res)=>{
 
     try {
         
-        product=await Product.findById(req.query.id);
-
-        return res.render('bidding_page',{p:product})
+        bid_product=await Bidding.findOne({product:req.query.id}).populate('product');
+        // console.log(bid_product);
+        return res.render('bidding_page',{bp:bid_product})
     } catch (error) {
         
         console.log("Error in rendering bidding page");

@@ -27,6 +27,9 @@ const ProducSchema = new mongoose.Schema({
             type: String
         }
     ],
+    basebid:{
+        type:Number
+    }
 },
     {
         timestamps: true
