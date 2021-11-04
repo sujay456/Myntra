@@ -70,6 +70,27 @@ th:last-child{
     margin-left: 1px;
 }
 
+.proceed-to-checkout button{
+    padding: 15px 25px;
+    width: 100%;
+    color: white;
+    background-color: rgba(241,115,31,0.9);
+    border: 0px transparent none;
+    cursor: pointer;
+    font-size: 1.05rem;
+    height: 60px;
+}
+
+.proceed-to-checkout button:focus{
+    opacity: 0.9;
+    outline:none;
+}
+
+.proceed-to-checkout button:hover{
+    font-size: 1.1rem;
+}
+
+
 .empty-cart{
     display: flex;
     flex-direction: column;

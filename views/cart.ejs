@@ -47,15 +47,26 @@
                 <td>Total</td>
                 <td>₹<%= ((0.18*totalPrice) + totalPrice).toFixed(2) %></td>
             </tr>
+            <tr style="height:150px;">
+                <td class="proceed-to-checkout" colspan="2">
+                    <a href="/buy">
+                        <button action="/buy"> 
+                            Proceed to checkout
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </a>
+                </td>
+            </tr>
         </table>
+    </div>
+
+</div>
         <% }else{ %>
             <div class="empty-cart">
                 <img src="images/emptycart.png">
                 <a href="/"><button type="button" class="btn btn-light shop-now-button">Shop Now !!</button></a>
             </div>
     <%}%>
-    </div>
-
-</div>
+    
 
 <script src="js/cart.js"></script>
