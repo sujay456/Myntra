@@ -15,7 +15,20 @@
     
         
     </div>
-    <div class="bidding-details inner_container">
+    
+    
+    <div class="not-started-yet inner_container" data-time="<%=bp.start_time%>">
+        <h2>Bidding will start in </h2>
+        <div class="times">
+            <div class="day tc"><h4>Days</h4> <h6 class="fill-day"></h6></div>
+            <div class="hr tc"><h4>Hours</h4> <h6 class="fill-hr"></h6> </div>
+            <div class="min tc"><h4>Minutes</h4><h6 class="fill-min"></h6> </div>
+            <div class="sec tc"><h4>Second</h4> <h6 class="fill-sec"></h6></div>
+            
+
+        </div>
+    </div>
+    <div class="bidding-details inner_container after-time" >
         <h5>Time Left : 4 min </h5>
         <h4>Curr bid : <span id="curr_bid_value"><%=bp.curr_max_bid%></span></h1>
 
@@ -23,13 +36,13 @@
         
         <!-- ye wallah div upar se urta hua ayega screen pe starting pe nhi rahega -->
         <div>
-            <form action="#" data-link="/bidraise" >
+            <form action="" data-link="/bidraise" >
                 <input type="number" name="bid" value="1001" id="bid_input" >
                 <input type="submit" name="" id="bid_button" value="raise bid">
             </form>
         </div>
     </div>
-    <div class="users-details inner_container">
+    <div class="users-details inner_container after-time">
         <h3>currently</h3>
         <div class="log-container">
             <ul class="logs">
@@ -42,6 +55,7 @@
 
 <script src="https://cdn.socket.io/4.3.2/socket.io.min.js" integrity="sha384-KAZ4DtjNhLChOB/hxXuKqhMLYvx3b5MlT55xPEiNmREKRzeEm+RVPlTnAn0ajQNs" crossorigin="anonymous"></script>
 <script src="js/bidEngine.js"></script>
+<script src="js/time.js"></script>
 <%if(locals.user) { %>
 <script>
     new BidEngine("<%=bp.id%>","<%=user.email%>","<%=user.name%>")

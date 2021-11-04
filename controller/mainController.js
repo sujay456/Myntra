@@ -15,12 +15,12 @@ module.exports.home = async (req, res) => {
 
         if (!productDB.length) {
             for (let x of products) {
-                await Product.create({ name: x['name'], price: x['price'], Desc: x['desc'], rating: x['rating'], image: x['image'], gallery: x['gallery'] })
+                await Product.create({ name: x['name'], price: x['price'], Desc: x['desc'], rating: x['rating'], image: x['image'], gallery: x['gallery'] , })
             }
             productDB=await Product.find({})
             for(let p of productDB)
             {
-                await Bidding.create({product:p.id,bidding_time:3,base_bid:p.price/10,curr_max_bid:parseInt( p.price/10)})
+                await Bidding.create({product:p.id,bidding_time:3,base_bid:p.price/10,curr_max_bid:parseInt( p.price/10),start_time:"Thu Nov 04 2021 11:42:00"})
             }
         }
         
@@ -237,11 +237,18 @@ module.exports.bidRaise=async (req,res)=>{
     // console.log(req.body.value)
     let bidP=await Bidding.findById(req.query.bidId)
     // console.log(bidP);
+    let user=await User.findById(req.user.id);
     if(bidP.curr_max_bid>=req.body.value)
     {
         // i am sorry babu
         return res.status(403).json({
-            message:"forbidden"
+            message:"Your bid Value is less than the current max value"
+        })
+    }
+    else if(user.points<req.body.value)
+    {
+        return res.status(403).json({
+            message:"You don't have enough coins"
         })
     }
     else
@@ -250,11 +257,14 @@ module.exports.bidRaise=async (req,res)=>{
         bidP.curr_winning_user=req.user.id;
 
         bidP.save();
-
+        user.points-=req.body.value;
+        user.save();
     }
 
 
     return res.status(200).json({
-        message:"Successfully placed the bid"
+        message:"Successfully placed the bid",
+        rem_point:user.points
+        
     })
 }

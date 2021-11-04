@@ -32,3 +32,21 @@
     border-radius: 10px;
     margin: 5px;
 }
+.not-started-yet
+{
+    /* border: 1px solid black; */
+    width: 50%;
+    /* padding: 10px; */
+    box-sizing: border-box;
+}
+.tc
+{
+    padding: 10px;
+}
+.times
+{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+}

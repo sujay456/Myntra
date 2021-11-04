@@ -19,6 +19,10 @@ const BiddingSchema=new mongoose.Schema({
     curr_winning_user:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'User'
+    },
+    start_time:{
+        type:String,
+        required:true
     }
 })
 

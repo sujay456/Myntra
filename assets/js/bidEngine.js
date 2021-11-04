@@ -1,5 +1,6 @@
 var logContainer=$('.logs')
 var curr_bid_value=$("#curr_bid_value");
+// console.log("hello in bid")
 class BidEngine{
     constructor(bidRoomId,userEmail,username)
     {
@@ -55,7 +56,6 @@ class BidEngine{
                     // console.log(curr_bid_value);
                     
                     // so the curr_user rn is the highest bidder
-
                     self.socket.emit('placedbid',{
                         user_name:self.username,
                         user_email:self.userEmail,
@@ -70,6 +70,7 @@ class BidEngine{
                             logContainer.append(`<li> ${data.user_name} bidded</li>`)
                         
                         curr_bid_value[0].innerText=`${data.value}`
+
                     })
                 }
             })
