@@ -20,7 +20,7 @@ module.exports.home = async (req, res) => {
             productDB=await Product.find({})
             for(let p of productDB)
             {
-                await Bidding.create({product:p.id,bidding_time:3,base_bid:p.price/10,curr_max_bid:parseInt( p.price/10),start_time:"Thu Nov 04 2021 11:42:00"})
+                await Bidding.create({product:p.id,bidding_time:3,base_bid:p.price/10,curr_max_bid:parseInt( p.price/10),start_time:"Thu Nov 05 2021 12:57:00",end_time:"Thu Nov 05 2021 13:00:00",closed:false})
             }
         }
         
@@ -29,7 +29,7 @@ module.exports.home = async (req, res) => {
     } catch (error) {
         console.log(error);
 
-    }
+    }   
 
 }
 
@@ -224,11 +224,22 @@ module.exports.bidding_page=async (req,res)=>{
     try {
         
         bid_product=await Bidding.findOne({product:req.query.id}).populate('product');
+
+        let f=new Date(bid_product.end_time).getTime()
+        let c=new Date().getTime();
+        let gap=f-c;
+        console.log(gap)
+        if(gap<=0)
+        {
+            bid_product.closed=true;
+        }
+        bid_product.save();
+        // check whether bid is over or not
         // console.log(bid_product);
         return res.render('bidding_page',{bp:bid_product})
     } catch (error) {
         
-        console.log("Error in rendering bidding page");
+        console.log("Error in rendering bidding page",error);
     }
 }
 
@@ -257,7 +268,6 @@ module.exports.bidRaise=async (req,res)=>{
         bidP.curr_winning_user=req.user.id;
 
         bidP.save();
-        user.points-=req.body.value;
         user.save();
     }
 
@@ -266,5 +276,65 @@ module.exports.bidRaise=async (req,res)=>{
         message:"Successfully placed the bid",
         rem_point:user.points
         
+    })
+}
+
+module.exports.bidcloser=async (req,res)=>{
+    let bid=await Bidding.findById(req.query.id);
+
+
+
+    let user=await User.findById(bid.curr_winning_user);
+    
+
+    if(bid)
+    {
+
+        bid.closed=true;
+        bid.save();
+
+        if(user)
+        {
+            user.points-=bid.curr_max_bid;
+            user.save();
+            return res.status(200).json({
+                winner:true,
+                message:"Bid Over",
+                wonUser:user.name,
+                biddingPoints:bid.curr_max_bid
+            })
+        }
+        else
+        {
+            return res.status(200).json({
+                winner:false
+            })
+        }
+       
+
+    }
+    else
+    {
+        return res.status(404).json({
+            message:"Bid not Found"
+        })
+    }
+}
+
+module.exports.winner=async (req,res)=>{
+
+    if(req.query.id=='*')
+    {
+        return res.render('winner',{
+            winnerName:"No one"
+        })
+    }
+
+    let bidWinner=await Bidding.findById(req.query.id).populate('curr_winning_user');
+
+
+
+    return res.render('winner',{
+        winnerName:bidWinner.curr_winning_user.name
     })
 }

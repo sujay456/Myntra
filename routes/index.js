@@ -15,12 +15,12 @@ router.get('/decrease-quantity',passport.CheckAuth,mainController.decreaseQuanti
 router.get('/increase-quantity',passport.CheckAuth,mainController.increaseQuantity); 
 router.get('/profile',passport.CheckAuth, mainController.profile);
 router.get('/logout', mainController.signout);
-router.get('/bidding_page',mainController.bidding_page);
+router.get('/bidding_page',passport.CheckAuth,mainController.bidding_page);
 router.post('/bidraise',mainController.bidRaise);
 router.get('/buy',passport.CheckAuth,mainController.BuyFromCart);
-
+router.get('/bidwinner',mainController.winner);
 router.post('/register', mainController.create);
-
+router.get('/bidClose',mainController.bidcloser)
 router.post('/session', passport.authenticate(
     'local',
     { failureRedirect: '/login' }

@@ -16,7 +16,7 @@
         
     </div>
     
-    
+    <% if(!bp.closed) {%>
     <div class="not-started-yet inner_container" data-time="<%=bp.start_time%>">
         <h2>Bidding will start in </h2>
         <div class="times">
@@ -28,8 +28,14 @@
 
         </div>
     </div>
-    <div class="bidding-details inner_container after-time" >
-        <h5>Time Left : 4 min </h5>
+    <div class="bidding-details inner_container after-time" data-end="<%=bp.end_time%>" data-id="<%=bp.id%>"" >
+        <h5>Time Left:</h5>
+        <div class="times">
+            <div class="min tc"><h5>Minutes</h5><h6 class="fill-min1"></h6> </div>
+            <div class="sec tc"><h5>Second</h5> <h6 class="fill-sec1"></h6></div>
+            
+
+        </div>
         <h4>Curr bid : <span id="curr_bid_value"><%=bp.curr_max_bid%></span></h1>
 
         <button type="button">Place bid</button>
@@ -49,7 +55,14 @@
                 <!-- <li>Hello</li> -->
             </ul>
         </div>
-    </div>  
+    </div> 
+    <%}else{%>
+    <div class="inner_container">
+        
+        <p>This bid is closed now</p>
+
+    </div>
+    <%}%>
 </div>
 </section>
 

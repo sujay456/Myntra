@@ -24,7 +24,8 @@ callbackURL:'http://localhost:8000/callback'
                 User.create({
                     name:profile.displayName,
                     email:profile.emails[0].value,
-                    password:crypto.randomBytes(20).toString('hex')
+                    password:crypto.randomBytes(20).toString('hex'),
+                    points:0
                 },function(err,user){
                     if(err)
                     {
