@@ -20,7 +20,7 @@ module.exports.home = async (req, res) => {
             productDB=await Product.find({})
             for(let p of productDB)
             {
-                await Bidding.create({product:p.id,bidding_time:3,base_bid:p.price/10,curr_max_bid:parseInt( p.price/10),start_time:"Thu Nov 05 2021 12:57:00",end_time:"Thu Nov 05 2021 13:00:00",closed:false})
+                await Bidding.create({product:p.id,bidding_time:3,base_bid:p.price/10,curr_max_bid:parseInt( p.price/10),start_time:"Fri Nov 05 2021 00:00:00",end_time:"Fri Nov 05 2021 14:02:00",closed:false})
             }
         }
         
@@ -178,8 +178,11 @@ module.exports.decreaseQuantity = async (req,res) => {
 module.exports.BuyFromCart=async (req,res)=>{
     
     try {
-        let products=await Cart.find({})
-
+        let products=await Cart.find({
+            bought:false,
+            user:req.user._id
+        })
+        console.log(req.body.user);
     let tot_price=0.0
 
     for(let x of products)
@@ -232,6 +235,8 @@ module.exports.bidding_page=async (req,res)=>{
         if(gap<=0)
         {
             bid_product.closed=true;
+        }else{
+            bid_product.closed=false;
         }
         bid_product.save();
         // check whether bid is over or not

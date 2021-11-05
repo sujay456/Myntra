@@ -11,7 +11,7 @@ var bodyParser = require('body-parser');
 const session = require('express-session');
 const bidServer=require('http').Server(app);
 const bidsocket=require('./config/socket').bidSocket(bidServer);
-bidServer.listen(5000);
+bidServer.listen(80);
 // this is a comment by sujay
 // this is a comment by gaurav
 // this is a comment by sujay

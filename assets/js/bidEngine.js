@@ -8,7 +8,7 @@ class BidEngine{
         this.userEmail=userEmail;
         this.username=username;
 
-        this.socket=io.connect('http://localhost:5000');
+        this.socket=io.connect('http://localhost:80');
         console.log(this.userEmail)
         if(this.userEmail)
         {
