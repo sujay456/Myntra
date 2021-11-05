@@ -54,7 +54,8 @@ module.exports.shop=async (req,res)=>{
 }
 
 module.exports.login = (req, res) => {
-
+    if (req.isAuthenticated())
+        return res.redirect('/');
     return res.render('login_page');
 }
 
@@ -83,9 +84,16 @@ module.exports.cart = async (req, res) => {
     // console.log()
     cartDB = await Cart.find({user:req.user.id,bought:false}); 
     
-    return res.render('cart',{cart:cartDB}); 
+    return res.render('cart2',{cart:cartDB}); 
 }
-
+module.exports.confirmation=async (req,res)=>{
+    try {
+        
+        return res.render('confirmation');
+    } catch (error) {
+        console.log("Error in confirmation",error);
+    }
+}
 // for registeration
 module.exports.create = async (req, res) => {
 
@@ -106,6 +114,16 @@ module.exports.create = async (req, res) => {
     }
 }
 
+module.exports.checkout=async (req,res)=>{
+
+    try {
+        
+        return res.render('checkout');
+
+    } catch (error) {
+        console.log("Error in rendering the checkout page",error);
+    }
+}
 
 // for loggin in / creating the session
 
