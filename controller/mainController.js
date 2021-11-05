@@ -117,8 +117,10 @@ module.exports.create = async (req, res) => {
 module.exports.checkout=async (req,res)=>{
 
     try {
-        
-        return res.render('checkout');
+        cartP=await Cart.find({user:req.user.id,bought:false})
+        return res.render('checkout',{
+            cartP:cartP
+        });
 
     } catch (error) {
         console.log("Error in rendering the checkout page",error);
@@ -216,7 +218,7 @@ module.exports.decreaseQuantity = async (req,res) => {
 module.exports.BuyFromCart=async (req,res)=>{
     
     try {
-        let products=await Cart.find({})
+        let products=await Cart.find({user:req.user.id,bought:false})
 
     let tot_price=0.0
 
@@ -250,7 +252,7 @@ module.exports.BuyFromCart=async (req,res)=>{
     }
     user.save();
     
-    return res.redirect('back');
+    return res.redirect('/confirm');
     } catch (error) {
         console.log("Error in buying the products",error);
     }

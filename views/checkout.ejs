@@ -49,7 +49,6 @@
                                   <label for="card-cvc">Card Code <span class="required">*</span></label>
                                   <input id="card-cvc" class="form-control"  type="tel" maxlength="4" placeholder="CVC" >
                                </div>
-                               <a href="confirmation.html" class="btn btn-main mt-20">Place Order</a >
                             </form>
                          </div>
                       </div>
@@ -60,23 +59,26 @@
                 <div class="product-checkout-details">
                    <div class="block">
                       <h4 class="widget-title">Order Summary</h4>
-                      <div class="media product-card">
-                         <a class="pull-left" href="product-single.html">
-                            <img class="media-object" src="images/shop/cart/cart-1.jpg" alt="Image" />
+                    <%let x=0.0%>
+                    <%for(let p of cartP){%>
+                      <% x+=(p.quantity*(p.price)) %>  
+                    <div class="media product-card">
+                         <a class="pull-left" href="/product?id=<%=p.id%>">
+                            <img class="media-object" src="images/<%=p.image%>" alt="Image" />
                          </a>
                          <div class="media-body">
-                            <h4 class="media-heading"><a href="product-single.html">Ambassador Heritage 1921</a></h4>
-                            <p class="price">1 x $249</p>
-                            <span class="remove" >Remove</span>
+                            <h4 class="media-heading"><a href="/product?id=<%=p.id%>"><%=p.name%></a></h4>
+                            <p class="price"><%=p.quantity%> x ₹<%=p.price%></p>
                          </div>
                       </div>
+                      <%}%>
                       <div class="discount-code">
                          <p>Have a discount ? <a data-toggle="modal" data-target="#coupon-modal" href="#!">enter it here</a></p>
                       </div>
                       <ul class="summary-prices">
                          <li>
                             <span>Subtotal:</span>
-                            <span class="price">$190</span>
+                            <span class="price">₹<%=x%></span>
                          </li>
                          <li>
                             <span>Shipping:</span>
@@ -85,11 +87,13 @@
                       </ul>
                       <div class="summary-total">
                          <span>Total</span>
-                         <span>$250</span>
+                         <span>₹<%=x%></span>
                       </div>
                       <div class="verified-icon">
-                         <img src="images/shop/verified.png">
+                         <img src="images/verified.png">
                       </div>
+                      <a href="/buy" class="btn btn-main mt-20">Place Order</a >
+
                    </div>
                 </div>
              </div>

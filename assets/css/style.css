@@ -980,6 +980,7 @@
  .product-modal {
    background: rgba(255, 255, 255, 0.9);
    text-align: center;
+   width: 100vw;
    padding: 0 !important;
  }
  .product-modal:before {
