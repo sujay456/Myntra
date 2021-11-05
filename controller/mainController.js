@@ -17,6 +17,7 @@ module.exports.home = async (req, res) => {
         { name: "Nike watch", rating: 4.0, desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', price: 1500, image: 'product-8.jpg', gallery: ['product-8.jpg', 'product-9.jpg'] }
         
         ]
+        
         productDB = await Product.find({})
 
         if (!productDB.length) {
@@ -24,14 +25,14 @@ module.exports.home = async (req, res) => {
                 await Product.create({ name: x['name'], price: x['price'], Desc: x['desc'], rating: x['rating'], image: x['image'], gallery: x['gallery'] , })
             }
             productDB=await Product.find({})
-            for(let p of productDB)
+            let i=6
+            for(let i=6;i<=8;++i)
             {
-                await Bidding.create({product:p.id,bidding_time:3,base_bid:p.price/10,curr_max_bid:parseInt( p.price/10),start_time:"Thu Nov 05 2021 12:57:00",end_time:"Thu Nov 06 2021 18:00:00",closed:false})
+                await Bidding.create({product:productDB[i].id,bidding_time:3,base_bid:productDB[i].price/10,curr_max_bid:parseInt( productDB[i].price/10),start_time:"Thu Nov 05 2021 12:57:00",end_time:"Fri Nov 05 2021 22:25:00",closed:false})
             }
         }
-        
-        
-        return res.render('home2', { products: productDB });
+        bproducts=await Bidding.find({}).populate('product');
+        return res.render('home2', { products: productDB,bproducts:bproducts });
     } catch (error) {
         console.log(error);
 
@@ -263,8 +264,8 @@ module.exports.bidding_page=async (req,res)=>{
 
     try {
         
-        bid_product=await Bidding.findOne({product:req.query.id}).populate('product');
-
+        bid_product=await Bidding.findById(req.query.id).populate('product');
+        console.log(bid_product);
         let f=new Date(bid_product.end_time).getTime()
         let c=new Date().getTime();
         let gap=f-c;

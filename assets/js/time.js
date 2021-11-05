@@ -1,8 +1,7 @@
 let timediv=$('.not-started-yet');
 let mainDiv= $('.after-time');
 
-mainDiv[0].hidden=true;
-mainDiv[1].hidden=true;
+
 let id=mainDiv[0].dataset.id;
 let text=timediv[0].dataset.time;
 let text1=mainDiv[0].dataset.end;
@@ -20,6 +19,7 @@ const countDownFStart=()=>
     let gap=f-p;
     if(gap<=0)
     {
+        console.log(mainDiv);
         timediv[0].hidden=true;
         mainDiv[0].hidden=false;
         mainDiv[1].hidden=false;

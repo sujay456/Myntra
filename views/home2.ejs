@@ -150,6 +150,32 @@
 		</div><!-- /.modal -->
 
 		</div>
+		
+	</div>
+</section>
+<section class="products section bg-gray" style="background-color: rgb(219, 219, 219);">
+	<div class="container" >
+		<div class="row">
+			<div class="title text-center">
+				<h2>Exclusive Products For Bidding</h2>
+			</div>
+		</div>
+		<div class="row">
+			<% for(p of locals.bproducts){%>
+			<div class="col-md-4 product-bidding" data-product="<%=p.id%>">
+				<div class="product-item" style="cursor: pointer;">
+					<div class="product-bid" data-product="<%=p.id%>">
+						<img class="img-responsive" data-product="<%=p.id%>" src="images/<%=p.product.image%>" alt="product-img" />
+						
+					</div>
+					<div class="product-content">
+						<h4><a href="product-single.html"><%=p.product.name%></a></h4>
+						<p class="price"> &nbsp;<i class="fas fa-coins" style="color: rgb(255, 174, 0);"></i> <%=p.base_bid%></p>
+					</div>
+				</div>
+			</div>
+        <%}%>
+		</div>
 	</div>
 </section>
 
