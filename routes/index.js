@@ -21,6 +21,7 @@ router.get('/buy',passport.CheckAuth,mainController.BuyFromCart);
 router.get('/bidwinner',mainController.winner);
 router.post('/register', mainController.create);
 router.get('/bidClose',mainController.bidcloser)
+router.get('/shop',mainController.shop);
 router.post('/session', passport.authenticate(
     'local',
     { failureRedirect: '/login' }

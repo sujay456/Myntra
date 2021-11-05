@@ -9,7 +9,13 @@ module.exports.home = async (req, res) => {
         let products = [{ name: "Red Printed T-Shirt", rating: 4, desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', price: 999, image: 'product-1.jpg', gallery: ['gallery-1.jpg', 'gallery-2.jpg'] },
         { name: "HRX Black Shoes", rating: 3.5, desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', price: 1999, image: 'product-2.jpg', gallery: ['product-10.jpg', 'product-2.jpg']},
         { name: "Comfortable Gray Pant", rating: 4.5, desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', price: 4999, image: 'product-3.jpg', gallery: ['product-3.jpg', 'product-12.jpg']},
-        { name: "Plain Navy Blue T-Shirt", rating: 4.0, desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', price: 1499, image: 'product-4.jpg', gallery: ['product-4.jpg', 'product-6.jpg'] }
+        { name: "Plain Navy Blue T-Shirt", rating: 4.0, desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', price: 1499, image: 'product-4.jpg', gallery: ['product-4.jpg', 'product-6.jpg'] },
+        { name: "Rainbow Shoes", rating: 4.0, desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', price: 2000, image: 'product-101.jpg', gallery: ['product-101.jpg', 'product-102.jpg'] },
+        { name: "Strayhorn SP", rating: 4.0, desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', price: 2500, image: 'product-102.jpg', gallery: ['product-102.jpg', 'product-104.jpg'] },
+        { name: "Bradley Mid", rating: 4.0, desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', price: 3500, image: 'product-103.jpg', gallery: ['product-103.jpg', 'product-104.jpg'] },
+        { name: "Crop Top", rating: 4.0, desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', price: 1500, image: 'product-104.jpg', gallery: ['product-104.jpg', 'single-product.jpg'] },
+        { name: "Nike watch", rating: 4.0, desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', price: 1500, image: 'product-8.jpg', gallery: ['product-8.jpg', 'product-9.jpg'] }
+        
         ]
         productDB = await Product.find({})
 
@@ -31,6 +37,20 @@ module.exports.home = async (req, res) => {
 
     }   
 
+}
+module.exports.shop=async (req,res)=>{
+
+    try {
+        let products=await Product.find({});
+
+        return res.render('shop',{
+            products:products
+        })
+
+    } catch (error) {
+        
+        console.log("error in shop rendering",error);
+    }
 }
 
 module.exports.login = (req, res) => {
