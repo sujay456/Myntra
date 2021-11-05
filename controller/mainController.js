@@ -20,12 +20,12 @@ module.exports.home = async (req, res) => {
             productDB=await Product.find({})
             for(let p of productDB)
             {
-                await Bidding.create({product:p.id,bidding_time:3,base_bid:p.price/10,curr_max_bid:parseInt( p.price/10),start_time:"Thu Nov 05 2021 12:57:00",end_time:"Thu Nov 05 2021 13:00:00",closed:false})
+                await Bidding.create({product:p.id,bidding_time:3,base_bid:p.price/10,curr_max_bid:parseInt( p.price/10),start_time:"Thu Nov 05 2021 12:57:00",end_time:"Thu Nov 06 2021 18:00:00",closed:false})
             }
         }
         
         
-        return res.render('home', { products: productDB });
+        return res.render('home2', { products: productDB });
     } catch (error) {
         console.log(error);
 
@@ -232,6 +232,10 @@ module.exports.bidding_page=async (req,res)=>{
         if(gap<=0)
         {
             bid_product.closed=true;
+        }
+        else
+        {
+            bid_product.closed=false;
         }
         bid_product.save();
         // check whether bid is over or not
