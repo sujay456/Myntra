@@ -1,11 +1,23 @@
 let timediv=$('.not-started-yet');
 let mainDiv= $('.after-time');
 
-mainDiv[0].hidden=true;
-mainDiv[1].hidden=true;
+
+
 let id=mainDiv[0].dataset.id;
 let text=timediv[0].dataset.time;
 let text1=mainDiv[0].dataset.end;
+
+let startF=new Date(text).getTime();
+let startP=new Date().getTime();
+
+if(startF-startP>0)
+{
+    mainDiv[0].hidden=true;
+    mainDiv[1].hidden=true;
+    
+}
+
+
 console.log(text);
 var si2;
 const countDownFStart=()=>
@@ -20,6 +32,7 @@ const countDownFStart=()=>
     let gap=f-p;
     if(gap<=0)
     {
+        console.log(mainDiv);
         timediv[0].hidden=true;
         mainDiv[0].hidden=false;
         mainDiv[1].hidden=false;
@@ -68,7 +81,7 @@ const countDownFEnd=()=>{
                 if(data.winner)
                     window.location.href=`/bidwinner?id=${id}`;
                 else
-                    window.location.href='/bidwinner?id="*"';
+                    window.location.href='/bidwinner?id=*';
             }
 
         })

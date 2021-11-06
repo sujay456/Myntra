@@ -2,6 +2,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
 const User = require('../model/user');
+const Cart =require('../model/cart');
 
 passport.use(new LocalStrategy({
     usernameField: 'email',
@@ -52,6 +53,16 @@ passport.SetAuthUserInfo = function (req, res, next) {
 
     if (req.isAuthenticated()) {
         res.locals.user = req.user;
+        Cart.find({user:req.user.id,bought:false},function(err,cart){
+            if(err)
+            {
+                console.log(err);
+            }
+            else
+            {
+                res.locals.cartP=cart;
+            }
+        })
     }
     return next();
 }

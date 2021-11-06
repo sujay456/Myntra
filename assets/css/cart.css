@@ -100,7 +100,8 @@ th:last-child{
 }
 
 .shop-now-button{
-    background: linear-gradient(45deg,rgba(241,115,31,0.9),rgba(253,0,206,0.8));
+    /* background: linear-gradient(45deg,rgba(241,115,31,0.9),rgba(253,0,206,0.8)); */
+    border: 1px solid 1px solid #ff3f6c;
     padding: 10px 20px;
 }
 

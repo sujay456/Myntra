@@ -4,11 +4,12 @@ const expressLayouts = require('express-ejs-layouts');
 const path = require('path');
 const port = 8000
 const db = require('./config/mongoose');
+const session=require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport');
+const Mongostore=require('connect-mongodb-session')(session)
 const passportGoogle=require('./config/passport-google');
 var bodyParser = require('body-parser');
-const session = require('express-session');
 const bidServer=require('http').Server(app);
 const bidsocket=require('./config/socket').bidSocket(bidServer);
 bidServer.listen(80);
@@ -43,6 +44,12 @@ app.use(session(
         cookie: {
             maxAge: (10000 * 60 * 60)
         },
+        store:new Mongostore(
+            {
+                mongooseConnection:db.connection,
+                autoRemove:'disabled'
+            }
+        )
         
     }
 ))

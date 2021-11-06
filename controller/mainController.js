@@ -9,8 +9,15 @@ module.exports.home = async (req, res) => {
         let products = [{ name: "Red Printed T-Shirt", rating: 4, desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', price: 999, image: 'product-1.jpg', gallery: ['gallery-1.jpg', 'gallery-2.jpg'] },
         { name: "HRX Black Shoes", rating: 3.5, desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', price: 1999, image: 'product-2.jpg', gallery: ['product-10.jpg', 'product-2.jpg']},
         { name: "Comfortable Gray Pant", rating: 4.5, desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', price: 4999, image: 'product-3.jpg', gallery: ['product-3.jpg', 'product-12.jpg']},
-        { name: "Plain Navy Blue T-Shirt", rating: 4.0, desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', price: 1499, image: 'product-4.jpg', gallery: ['product-4.jpg', 'product-6.jpg'] }
+        { name: "Plain Navy Blue T-Shirt", rating: 4.0, desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', price: 1499, image: 'product-4.jpg', gallery: ['product-4.jpg', 'product-6.jpg'] },
+        { name: "Rainbow Shoes", rating: 4.0, desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', price: 2000, image: 'product-101.jpg', gallery: ['product-101.jpg', 'product-102.jpg'] },
+        { name: "Strayhorn SP", rating: 4.0, desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', price: 2500, image: 'product-102.jpg', gallery: ['product-102.jpg', 'product-104.jpg'] },
+        { name: "Bradley Mid", rating: 4.0, desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', price: 3500, image: 'product-103.jpg', gallery: ['product-103.jpg', 'product-104.jpg'] },
+        { name: "Crop Top", rating: 4.0, desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', price: 1500, image: 'product-104.jpg', gallery: ['product-104.jpg', 'single-product.jpg'] },
+        { name: "Nike watch", rating: 4.0, desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', price: 1500, image: 'product-8.jpg', gallery: ['product-8.jpg', 'product-9.jpg'] }
+        
         ]
+        
         productDB = await Product.find({})
 
         if (!productDB.length) {
@@ -18,23 +25,38 @@ module.exports.home = async (req, res) => {
                 await Product.create({ name: x['name'], price: x['price'], Desc: x['desc'], rating: x['rating'], image: x['image'], gallery: x['gallery'] , })
             }
             productDB=await Product.find({})
-            for(let p of productDB)
+            let i=6
+            for(let i=6;i<=8;++i)
             {
-                await Bidding.create({product:p.id,bidding_time:3,base_bid:p.price/10,curr_max_bid:parseInt( p.price/10),start_time:"Fri Nov 05 2021 00:00:00",end_time:"Fri Nov 05 2021 14:02:00",closed:false})
+                await Bidding.create({product:productDB[i].id,bidding_time:3,base_bid:productDB[i].price/10,curr_max_bid:parseInt( productDB[i].price/10),start_time:"Sat Nov 06 2021 14:11:00",end_time:"Sat Nov 06 2021 14:21:00",closed:false})
             }
         }
-        
-        
-        return res.render('home', { products: productDB });
+        bproducts=await Bidding.find({}).populate('product');
+        return res.render('home2', { products: productDB,bproducts:bproducts });
     } catch (error) {
         console.log(error);
 
     }   
 
 }
+module.exports.shop=async (req,res)=>{
+
+    try {
+        let products=await Product.find({});
+
+        return res.render('shop',{
+            products:products
+        })
+
+    } catch (error) {
+        
+        console.log("error in shop rendering",error);
+    }
+}
 
 module.exports.login = (req, res) => {
-
+    if (req.isAuthenticated())
+        return res.redirect('/');
     return res.render('login_page');
 }
 
@@ -63,9 +85,16 @@ module.exports.cart = async (req, res) => {
     // console.log()
     cartDB = await Cart.find({user:req.user.id,bought:false}); 
     
-    return res.render('cart',{cart:cartDB}); 
+    return res.render('cart2',{cart:cartDB}); 
 }
-
+module.exports.confirmation=async (req,res)=>{
+    try {
+        
+        return res.render('confirmation');
+    } catch (error) {
+        console.log("Error in confirmation",error);
+    }
+}
 // for registeration
 module.exports.create = async (req, res) => {
 
@@ -86,6 +115,18 @@ module.exports.create = async (req, res) => {
     }
 }
 
+module.exports.checkout=async (req,res)=>{
+
+    try {
+        cartP=await Cart.find({user:req.user.id,bought:false})
+        return res.render('checkout',{
+            cartP:cartP
+        });
+
+    } catch (error) {
+        console.log("Error in rendering the checkout page",error);
+    }
+}
 
 // for loggin in / creating the session
 
@@ -116,16 +157,28 @@ module.exports.addItem = async (req,res) => {
     
     try{
         // await Cart.deleteMany({productId:req.query.id});
-        let productToAdd = await Product.findById(req.query.id); 
-        await Cart.create({ 
-            productId: productToAdd.id,
-            name: productToAdd.name, 
-            price: productToAdd.price, 
-            image: productToAdd.image,
-            quantity: 1,
-            bought:false,
-            user:req.user._id 
-        });
+        let productToAdd = await Product.findById(req.query.id);
+        
+    
+        cart=await Cart.findOne({productId:productToAdd.id,user:req.user.id,bought:false})
+        if(cart)
+        {
+            cart.quantity+=1;
+            cart.save();
+        }
+        else
+        {
+            await Cart.create({ 
+                productId: productToAdd.id,
+                name: productToAdd.name, 
+                price: productToAdd.price, 
+                image: productToAdd.image,
+                quantity: 1,
+                bought:false,
+                user:req.user._id 
+            });
+            
+        }
         
         return res.redirect('/cart'); 
     }catch(error){
@@ -178,11 +231,8 @@ module.exports.decreaseQuantity = async (req,res) => {
 module.exports.BuyFromCart=async (req,res)=>{
     
     try {
-        let products=await Cart.find({
-            bought:false,
-            user:req.user._id
-        })
-        console.log(req.body.user);
+        let products=await Cart.find({user:req.user.id,bought:false})
+
     let tot_price=0.0
 
     for(let x of products)
@@ -215,7 +265,7 @@ module.exports.BuyFromCart=async (req,res)=>{
     }
     user.save();
     
-    return res.redirect('back');
+    return res.redirect('/confirm');
     } catch (error) {
         console.log("Error in buying the products",error);
     }
@@ -226,8 +276,8 @@ module.exports.bidding_page=async (req,res)=>{
 
     try {
         
-        bid_product=await Bidding.findOne({product:req.query.id}).populate('product');
-
+        bid_product=await Bidding.findById(req.query.id).populate('product');
+        console.log(bid_product);
         let f=new Date(bid_product.end_time).getTime()
         let c=new Date().getTime();
         let gap=f-c;
@@ -238,6 +288,7 @@ module.exports.bidding_page=async (req,res)=>{
         }else{
             bid_product.closed=false;
         }
+       
         bid_product.save();
         // check whether bid is over or not
         // console.log(bid_product);
@@ -289,7 +340,6 @@ module.exports.bidcloser=async (req,res)=>{
 
 
 
-    let user=await User.findById(bid.curr_winning_user);
     
 
     if(bid)
@@ -298,8 +348,10 @@ module.exports.bidcloser=async (req,res)=>{
         bid.closed=true;
         bid.save();
 
-        if(user)
+        if(bid.curr_winning_user)
         {
+            let user=await User.findById(bid.curr_winning_user);
+
             user.points-=bid.curr_max_bid;
             user.save();
             return res.status(200).json({
@@ -328,18 +380,21 @@ module.exports.bidcloser=async (req,res)=>{
 
 module.exports.winner=async (req,res)=>{
 
+    cartP=await Cart.find({user:req.user.id,bought:false});
+
     if(req.query.id=='*')
     {
         return res.render('winner',{
-            winnerName:"No one"
+            winnerName:"No one",
+            cartP:cartP
         })
     }
-
+    console.log(req.query.id);
     let bidWinner=await Bidding.findById(req.query.id).populate('curr_winning_user');
 
 
-
     return res.render('winner',{
-        winnerName:bidWinner.curr_winning_user.name
+        winnerName:bidWinner.curr_winning_user.name,
+        cartP:cartP
     })
 }

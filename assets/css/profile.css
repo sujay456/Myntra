@@ -8,6 +8,7 @@
     width: 60%;
     display: inline-block;
     margin-left: -5%;
+    /* border: 1px solid grey; */
 }
 
 h4{
@@ -20,7 +21,7 @@ table {
     min-width: 300px;
     margin-left:7.5%;
 }
-  
+
 th, td {
     padding: 15px 8px;
     text-align: left;
@@ -39,9 +40,13 @@ table i{
     width: 1110px;
     text-align: center;
 }
-
-.past-order tr:hover{
-    background: linear-gradient(45deg,rgba(241,115,31,0.3),rgba(253,0,206,0.3));
+.actual-orders
+{
+    transition: all 0.3s ease;
+}
+.actual-orders:hover{
+    /* background: linear-gradient(45deg,rgba(241,115,31,0.3),rgba(253,0,206,0.3)); */
+    transform: translateY(-7px);
 }
 
 @media only screen and (max-width: 1200px) {

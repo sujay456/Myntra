@@ -1,3 +1,18 @@
+.add-to-cart
+{
+    padding: 7px;
+    transition: all 0.4s ease;
+}
+.add-to-cart:hover
+{
+    transform: translateY(-2px);
+}
+.add-to-cart:active
+{
+    transform: translateY(2px);
+}
+
+
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
     background-color: #ff3e6c !important;
 }

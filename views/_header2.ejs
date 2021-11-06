@@ -1,0 +1,165 @@
+<section class="top-header">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 col-xs-12 col-sm-4">
+				<div class="contact-number">
+					<i class="tf-ion-ios-telephone"></i>
+					<span>0129- 12323-123123</span>
+				</div>
+			</div>
+			<div class="col-md-4 col-xs-12 col-sm-4">
+				<!-- Site Logo -->
+				<div class="logo text-center">
+					<a href="/">
+						<!-- replace logo here -->
+						<img src="images/logo.png" width="150px" />
+					</a>
+				</div>
+			</div>
+			<div class="col-md-4 col-xs-12 col-sm-4">
+				<!-- Cart -->
+				<ul class="top-menu text-right list-inline">
+					<!-- this is for cart -->
+					<% if(locals.user){%>
+					<li class="dropdown cart-nav dropdown-slide">
+						<a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i
+								class="tf-ion-android-cart"></i>Cart</a>
+						<div class="dropdown-menu cart-dropdown">
+							<!-- Cart Item -->
+							<% let x=0.0%>
+							<%if(cartP.length!=0){%>
+							<%for (let p of cartP){%>
+							<% x+=(p.quantity*p.price)  %>
+							<div class="media">
+								<a class="pull-left" href="#!">
+									<img class="media-object" src="images/<%=p.image%>" alt="image" />
+								</a>
+								<div class="media-body">
+									<h4 class="media-heading"><a href="#!"><%=p.name%></a></h4>
+									<div class="cart-price">
+										<span><%=p.quantity%> x</span>
+										<span><%=p.price%></span>
+									</div>
+									<h5><strong>₹<%= p.quantity*p.price %></strong></h5>
+								</div>
+								<a href="#!" class="remove"><i class="tf-ion-close"></i></a>
+							</div><!-- / Cart Item -->
+							<!-- Cart Item -->
+							<div class="cart-summary">
+								<span>Total</span>
+								<span class="total-price">₹<%=x%></span>
+							</div>
+							<ul class="text-center cart-buttons">
+								<li><a href="/cart" class="btn btn-small">View Cart</a></li>
+								<li><a href="/checkout" class="btn btn-small btn-solid-border">Checkout</a></li>
+							</ul>
+							<%}%>
+							<%}else{%>
+								<p style="font-weight: bold; color: grey;">No items in the cart</p>
+							<%}%>
+							
+							
+						</div>
+
+					</li><!-- / Cart -->	
+					<%}%>
+					<!-- Search -->
+					<li class="dropdown search dropdown-slide">
+						<a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i
+								class="tf-ion-ios-search-strong"></i> Search</a>
+						<ul class="dropdown-menu search-dropdown">
+							<li>
+								<form action="post"><input type="search" class="form-control" placeholder="Search..."></form>
+							</li>
+						</ul>
+					</li><!-- / Search -->
+
+					<!-- Languages -->
+					<li class="commonSelect">
+						<select class="form-control">
+							<option>EN</option>
+							<option>DE</option>
+							<option>FR</option>
+							<option>ES</option>
+						</select>
+					</li><!-- / Languages -->
+
+				</ul><!-- / .nav .navbar-nav .navbar-right -->
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+
+<!-- End Top Header Bar -->
+
+
+
+
+
+<section class="menu">
+	<nav class="navbar navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<h2 class="menu-title">Main Menu</h2>
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+					aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+
+			</div><!-- / .navbar-header -->
+
+			<!-- Navbar Links -->
+			<div id="navbar" class="navbar-collapse collapse text-center">
+				<ul class="nav navbar-nav">
+
+					<!-- Home -->
+					<li class="dropdown ">
+						<a href="/">Home</a>
+					</li><!-- / Home -->
+
+
+					<!-- Elements -->
+					<li class="dropdown dropdown-slide">
+						<a href="/shop" class="Shop"  data-hover="dropdown" data-delay="350"
+							role="button" aria-haspopup="true" aria-expanded="false">Shop </a>
+					</li><!-- / Elements -->
+					<%if(!locals.user){%>
+					<li class="dropdown dropdown-slide">
+						<a href="/login" class="Login"  data-hover="dropdown" data-delay="350"
+							role="button" aria-haspopup="true" aria-expanded="false">Login </a>
+					</li><!-- / Elements -->
+					
+					<li class="dropdown dropdown-slide">
+						<a href="/signup" class="signup">Sign up</a>
+					</li><!-- / Elements -->
+					<%}else{%>
+
+						<li class="dropdown dropdown-slide">
+							<a href="/profile" class="Login" data-hover="dropdown" data-delay="350"
+								role="button" aria-haspopup="true" aria-expanded="false"><%=user.name%></a>
+						</li><!-- / Elements -->
+						
+						<li class="dropdown dropdown-slide">
+							<a href="#" class="Login" data-hover="dropdown" data-delay="350"
+								role="button" aria-haspopup="true" aria-expanded="false">Coins  <span style="font-weight: bold;"><%=user.points%></span> &nbsp;<i class="fas fa-coins" style="color: rgb(255, 174, 0);"></i></a>
+						</li><!-- / Elements -->
+						
+					<%}%>
+					
+					
+					
+				</ul><!-- / .nav .navbar-nav -->
+
+			</div>
+			<!--/.navbar-collapse -->
+		</div><!-- / .container -->
+	</nav>
+</section>
+
+

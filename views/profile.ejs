@@ -3,15 +3,15 @@
     <h4>My Account</h4>
     <table>
         <tr>
-            <td>Name</td>
+            <td style="font-weight: bold;">Name</td>
             <td><%=user.name%></td>
         </tr>
-        <tr>
-            <td>Email</td>
+        <tr >
+            <td style="font-weight: bold;">Email</td>
             <td><%=user.email%></td>
         </tr>
         <tr>
-            <td>Coins</td>
+            <td style="font-weight: bold;">Coins</td>
             <td><%=user.points%> &nbsp;<i class="fas fa-coins"></i></td>
         </tr>
     </table>
@@ -20,7 +20,7 @@
 <div class="container-2">
     <h4>Past Orders</h4>
     <table class="past-order">
-        <tr>
+        <tr style="border: 1px solid rgb(182, 182, 182);">
             <th>Product</th>
             <th>Price</th>
             <th>Quantity</th>
@@ -28,7 +28,7 @@
             <th>Coins Earned</th>
         </tr>
         <%for(let p of past){%>
-        <tr>
+        <tr class="actual-orders" style="border: 1px soldi grey;">
             <td>
                 <div class="cart-info">
                     <img src="images/<%=p.image%>" height="150px">
