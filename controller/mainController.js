@@ -28,7 +28,7 @@ module.exports.home = async (req, res) => {
             let i=6
             for(let i=6;i<=8;++i)
             {
-                await Bidding.create({product:productDB[i].id,bidding_time:3,base_bid:productDB[i].price/10,curr_max_bid:parseInt( productDB[i].price/10),start_time:"Sat Nov 06 2021 14:11:00",end_time:"Sat Nov 06 2021 14:21:00",closed:false})
+                await Bidding.create({product:productDB[i].id,bidding_time:3,base_bid:productDB[i].price/10,curr_max_bid:parseInt( productDB[i].price/10),start_time:"Sat Nov 06 2021 14:11:00",end_time:"Sat Nov 06 2021 14:30:00",closed:false})
             }
         }
         bproducts=await Bidding.find({}).populate('product');
@@ -394,7 +394,7 @@ module.exports.winner=async (req,res)=>{
 
 
     return res.render('winner',{
-        winnerName:bidWinner.curr_winning_user.name,
+        winnerName:bidWinner.curr_winning_user,
         cartP:cartP
     })
 }
