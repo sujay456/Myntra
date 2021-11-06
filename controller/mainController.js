@@ -28,7 +28,7 @@ module.exports.home = async (req, res) => {
             let i=6
             for(let i=6;i<=8;++i)
             {
-                await Bidding.create({product:productDB[i].id,bidding_time:3,base_bid:productDB[i].price/10,curr_max_bid:parseInt( productDB[i].price/10),start_time:"Thu Nov 05 2021 12:57:00",end_time:"Fri Nov 05 2021 22:25:00",closed:false})
+                await Bidding.create({product:productDB[i].id,bidding_time:3,base_bid:productDB[i].price/10,curr_max_bid:parseInt( productDB[i].price/10),start_time:"Sat Nov 06 2021 14:11:00",end_time:"Sat Nov 06 2021 14:21:00",closed:false})
             }
         }
         bproducts=await Bidding.find({}).populate('product');
@@ -341,7 +341,6 @@ module.exports.bidcloser=async (req,res)=>{
 
 
 
-    let user=await User.findById(bid.curr_winning_user);
     
 
     if(bid)
@@ -350,8 +349,10 @@ module.exports.bidcloser=async (req,res)=>{
         bid.closed=true;
         bid.save();
 
-        if(user)
+        if(bid.curr_winning_user)
         {
+            let user=await User.findById(bid.curr_winning_user);
+
             user.points-=bid.curr_max_bid;
             user.save();
             return res.status(200).json({
@@ -380,18 +381,21 @@ module.exports.bidcloser=async (req,res)=>{
 
 module.exports.winner=async (req,res)=>{
 
+    cartP=await Cart.find({user:req.user.id,bought:false});
+
     if(req.query.id=='*')
     {
         return res.render('winner',{
-            winnerName:"No one"
+            winnerName:"No one",
+            cartP:cartP
         })
     }
-
+    console.log(req.query.id);
     let bidWinner=await Bidding.findById(req.query.id).populate('curr_winning_user');
 
 
-
     return res.render('winner',{
-        winnerName:bidWinner.curr_winning_user.name
+        winnerName:bidWinner.curr_winning_user.name,
+        cartP:cartP
     })
 }
