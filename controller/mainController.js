@@ -157,16 +157,28 @@ module.exports.addItem = async (req,res) => {
     
     try{
         // await Cart.deleteMany({productId:req.query.id});
-        let productToAdd = await Product.findById(req.query.id); 
-        await Cart.create({ 
-            productId: productToAdd.id,
-            name: productToAdd.name, 
-            price: productToAdd.price, 
-            image: productToAdd.image,
-            quantity: 1,
-            bought:false,
-            user:req.user._id 
-        });
+        let productToAdd = await Product.findById(req.query.id);
+        
+    
+        cart=await Cart.findOne({productId:productToAdd.id,user:req.user.id,bought:false})
+        if(cart)
+        {
+            cart.quantity+=1;
+            cart.save();
+        }
+        else
+        {
+            await Cart.create({ 
+                productId: productToAdd.id,
+                name: productToAdd.name, 
+                price: productToAdd.price, 
+                image: productToAdd.image,
+                quantity: 1,
+                bought:false,
+                user:req.user._id 
+            });
+            
+        }
         
         return res.redirect('/cart'); 
     }catch(error){
