@@ -28,15 +28,7 @@ module.exports.home = async (req, res) => {
             let i=6
             for(let i=6;i<=8;++i)
             {
-<<<<<<< HEAD
-<<<<<<< HEAD
-                await Bidding.create({product:productDB[i].id,bidding_time:3,base_bid:productDB[i].price/10,curr_max_bid:parseInt( productDB[i].price/10),start_time:"Sat Nov 06 2021 14:11:00",end_time:"Sat Nov 06 2021 14:30:00",closed:false})
-=======
-                await Bidding.create({product:productDB[i].id,bidding_time:3,base_bid:productDB[i].price/10,curr_max_bid:parseInt( productDB[i].price/10),start_time:"Thu Nov 05 2021 12:57:00",end_time:"Sun Nov 07 2021 10:00:00",closed:false})
->>>>>>> 225f14c53669fde2649f1555e95df084c4286d98
-=======
-                await Bidding.create({product:productDB[i].id,bidding_time:3,base_bid:productDB[i].price/10,curr_max_bid:parseInt( productDB[i].price/10),start_time:"Sun Nov 07 2021 12:20:00",end_time:"Sun Nov 07 2021 13:50:00",closed:false})
->>>>>>> sujay
+                await Bidding.create({product:productDB[i].id,bidding_time:3,base_bid:productDB[i].price/10,curr_max_bid:parseInt( productDB[i].price/10),start_time:"Thu Nov 05 2021 15:47:00",end_time:"Sun Nov 07 2021 15:55:00",closed:false});
             }
         }
         bproducts=await Bidding.find({}).populate('product');
@@ -316,15 +308,13 @@ module.exports.bidRaise=async (req,res)=>{
     if(bidP.curr_max_bid>=req.body.value)
     {
         // i am sorry babu
-        return res.status(200).json({
-            bid:false,
-            message:"Place a Legal Bid "
+        return res.status(403).json({
+            message:"Your bid Value is less than the current max value"
         })
     }
     else if(user.points<req.body.value)
     {
-        return res.status(200).json({
-            bid:false,
+        return res.status(403).json({
             message:"You don't have enough coins"
         })
     }
@@ -340,7 +330,6 @@ module.exports.bidRaise=async (req,res)=>{
 
     return res.status(200).json({
         message:"Successfully placed the bid",
-        bid:true,
         rem_point:user.points
         
     })
