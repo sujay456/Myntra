@@ -2,9 +2,22 @@ let timediv=$('.not-started-yet');
 let mainDiv= $('.after-time');
 
 
+
 let id=mainDiv[0].dataset.id;
 let text=timediv[0].dataset.time;
 let text1=mainDiv[0].dataset.end;
+
+let startF=new Date(text).getTime();
+let startP=new Date().getTime();
+
+if(startF-startP>0)
+{
+    mainDiv[0].hidden=true;
+    mainDiv[1].hidden=true;
+    
+}
+
+
 console.log(text);
 var si2;
 const countDownFStart=()=>
@@ -68,7 +81,7 @@ const countDownFEnd=()=>{
                 if(data.winner)
                     window.location.href=`/bidwinner?id=${id}`;
                 else
-                    window.location.href='/bidwinner?id="*"';
+                    window.location.href='/bidwinner?id=*';
             }
 
         })

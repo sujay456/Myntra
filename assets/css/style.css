@@ -1023,7 +1023,8 @@
    border-radius: 0;
    box-shadow: none;
    border: none;
- }
+  width: 650px;
+  }
  .product-modal .modal-content .modal-body {
    padding: 30px;
  }

@@ -23,7 +23,7 @@
                         <div class="row text-muted">Shirt</div>
                         <div class="row"><%=cp.name%></div>
                     </div>
-                    <div class="col"> <a href="#">-</a><a href="#" class="border"><%=cp.quantity%></a><a href="#">+</a> </div>
+                    <div class="col"> <% if (cp.quantity==1){%> <a href="#" class="remove-from-cart" style="color: red;" data-product="<%=cp.id%>" ><i class="fas fa-times" data-product="<%=cp.id%>"></i></a> <%}else{%> <a href="" class="decreaseQuantity" data-product="<%=cp.id%>">-</a><%}%><a href="#" class="border"><%=cp.quantity%></a><a href="#" class="increaseQuantity" data-product="<%=cp.id%>">+</a> </div>
                     <div class="col">₹<%=cp.price%><span class="close">&#10005;</span></div>
                 </div>
             </div>
@@ -59,7 +59,7 @@
 <%}else{%>
     <div class="empty-cart">
         <img src="images/emptycart.png">
-        <a href="/shop"><button type="button" class="btn btn-light shop-now-button" style="color: #ff3f6c; background-color: white; border: 1px solid #ff3f6c; font-weight: 600; ">Shop Now !!</button></a>
+        <a href="/shop"><button type="button" class="btn btn-light shop-now-button" style="color: #ff3f6c; background-color: white; border: 1px solid #ff3f6c; font-weight: 600; font-size: 1.5rem; ">Shop Now !!</button></a>
     </div>
 <%}%>
 <script src="js/cart.js"></script>

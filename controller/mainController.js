@@ -157,16 +157,28 @@ module.exports.addItem = async (req,res) => {
     
     try{
         // await Cart.deleteMany({productId:req.query.id});
-        let productToAdd = await Product.findById(req.query.id); 
-        await Cart.create({ 
-            productId: productToAdd.id,
-            name: productToAdd.name, 
-            price: productToAdd.price, 
-            image: productToAdd.image,
-            quantity: 1,
-            bought:false,
-            user:req.user._id 
-        });
+        let productToAdd = await Product.findById(req.query.id);
+        
+    
+        cart=await Cart.findOne({productId:productToAdd.id,user:req.user.id,bought:false})
+        if(cart)
+        {
+            cart.quantity+=1;
+            cart.save();
+        }
+        else
+        {
+            await Cart.create({ 
+                productId: productToAdd.id,
+                name: productToAdd.name, 
+                price: productToAdd.price, 
+                image: productToAdd.image,
+                quantity: 1,
+                bought:false,
+                user:req.user._id 
+            });
+            
+        }
         
         return res.redirect('/cart'); 
     }catch(error){
@@ -273,11 +285,10 @@ module.exports.bidding_page=async (req,res)=>{
         if(gap<=0)
         {
             bid_product.closed=true;
-        }
-        else
-        {
+        }else{
             bid_product.closed=false;
         }
+       
         bid_product.save();
         // check whether bid is over or not
         // console.log(bid_product);
@@ -329,7 +340,6 @@ module.exports.bidcloser=async (req,res)=>{
 
 
 
-    let user=await User.findById(bid.curr_winning_user);
     
 
     if(bid)
@@ -338,8 +348,10 @@ module.exports.bidcloser=async (req,res)=>{
         bid.closed=true;
         bid.save();
 
-        if(user)
+        if(bid.curr_winning_user)
         {
+            let user=await User.findById(bid.curr_winning_user);
+
             user.points-=bid.curr_max_bid;
             user.save();
             return res.status(200).json({
@@ -368,18 +380,21 @@ module.exports.bidcloser=async (req,res)=>{
 
 module.exports.winner=async (req,res)=>{
 
+    cartP=await Cart.find({user:req.user.id,bought:false});
+
     if(req.query.id=='*')
     {
         return res.render('winner',{
-            winnerName:"No one"
+            winnerName:"No one",
+            cartP:cartP
         })
     }
-
+    console.log(req.query.id);
     let bidWinner=await Bidding.findById(req.query.id).populate('curr_winning_user');
 
 
-
     return res.render('winner',{
-        winnerName:bidWinner.curr_winning_user.name
+        winnerName:bidWinner.curr_winning_user.name,
+        cartP:cartP
     })
 }
