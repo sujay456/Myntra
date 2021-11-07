@@ -1,0 +1,26 @@
+.winner-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 150px;
+    margin-top: 75px;
+}
+
+.winner-container button{
+    font-size: 1.5rem;
+    letter-spacing: 0.1rem;
+}
+
+.winner-container .image-1{
+    position: fixed;
+    left: 20%;
+    top: 28%;
+}
+
+.winner-container .image-2{
+    position: fixed;
+    transform: rotate(270deg);
+    top:28%;
+    right: 20%;
+}

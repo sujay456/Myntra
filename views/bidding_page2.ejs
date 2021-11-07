@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="css/bidding2.css">
   <section class="single-product">
     <% if(!bp.closed) {%>
-    <div class="row mt-20">
+    <div class="row mt-20"> 
         <div class="col-md-5">
             <div class="single-product-slider">
                 <div id='carousel-custom' class='carousel slide' data-ride='carousel'>
@@ -73,7 +73,11 @@
         </div>
         <div class="col-md-7">
             <div class="single-product-details"> 
-                <h2><%= bp.product.name %></h2>
+                <h2>
+                    <%= bp.product.name %>
+                    <div class="min tc">:<h6 class="fill-min1"></h6></div>
+                    <div class="sec tc"><h6 class="fill-sec1"></h6></div>
+                </h2>
                 <p class="product-description mt-20">
                     <%= bp.product.Desc %>
                 </p>
@@ -106,11 +110,11 @@
                             <input type="submit" name="" id="bid_button" value="raise bid">
                         </form>
                     </div>
-                </div> -->
+                </div> --> 
                 <button type="button" class="btn btn-main mt-20 place-bid-button">
                     PLACE BID
                 </button>
-                <div id="complete-bid-form" class="bidding-details inner_container after-time bid-form" data-end="<%=bp.end_time%>" data-id="<%=bp.id%>" >
+                <div id="complete-bid-form" class="bidding-details inner_container after-time display-none" data-end="<%=bp.end_time%>" data-id="<%=bp.id%>" >
                     <div class="bid-input-info">
                         <form action="" data-link="/bidraise" >
                             <input id="bid_input" class="bid-value-input" type="number" value="0" name="bid">
@@ -121,13 +125,10 @@
             </div>
         </div> 
     </div>
-    <div class="users-details inner_container after-time">
-        <h3>currently</h3>
-        <div class="log-container">
+    <div class="users-details">
             <ul class="logs">
-                <!-- <li>Hello</li> -->
+                <!-- <li>Hello</li> --> 
             </ul>
-        </div>
     </div> 
     <div class="row">
         <div class="col-xs-12">
@@ -228,7 +229,16 @@
         </div>
     </div>
 </div>
-    <%}%>
+    <%}else{%>
+        <div class="bid-closed-now">
+            <h2>This bid is closed now</h2>
+            <a href="/">
+                <button class="btn btn-main mt-20">
+                    HOME PAGE
+                </button>
+            </a>
+        </div>
+        <%}%>
 </section>
 
 <script src="plugins/jquery/dist/jquery.min.js"></script>

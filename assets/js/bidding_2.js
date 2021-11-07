@@ -15,7 +15,8 @@
     });
 
     $('.place-bid-button').on('click',function(){
-      $("#complete-bid-form").removeClass("bid-form");
+      $("#complete-bid-form").removeClass("display-none");
+      $('.place-bid-button').addClass("display-none");
     });
   
   })(jQuery);
