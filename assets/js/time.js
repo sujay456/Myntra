@@ -3,6 +3,7 @@ let mainDiv= $('.after-time');
 
 
 
+
 let id=mainDiv[0].dataset.id;
 let text=timediv[0].dataset.time;
 let text1=mainDiv[0].dataset.end;
@@ -13,7 +14,9 @@ let startP=new Date().getTime();
 if(startF-startP>0)
 {
     mainDiv[0].hidden=true;
-    mainDiv[1].hidden=true;
+    // console.log($('.times'));
+    $('.times')[0].hidden=true;
+    // mainDiv[1].hidden=true;
     
 }
 
@@ -32,10 +35,12 @@ const countDownFStart=()=>
     let gap=f-p;
     if(gap<=0)
     {
-        console.log(mainDiv);
+        // console.log(mainDiv);
         timediv[0].hidden=true;
         mainDiv[0].hidden=false;
-        mainDiv[1].hidden=false;
+        $('.times')[0].hidden=false;
+
+        // mainDiv[1].hidden=false;
         clearInterval(si)
         si2=setInterval(countDownFEnd,100);
         // return;
@@ -68,7 +73,11 @@ const countDownFEnd=()=>{
     let p=new Date().getTime();
     let gap2=f-p
     // console.log(gap2)
-
+    if(gap2<=10000)
+    {
+        $('.fill-min1').css('color','red');
+    $('.fill-sec1').css('color','red');
+    }
     if(gap2<=0)
     {
         clearInterval(si2)
@@ -92,8 +101,8 @@ const countDownFEnd=()=>{
     let min=sec*60;
     let remMin=Math.floor(gap2/min);
     let remSec=Math.floor((gap2%min)/sec);
+    // console.log(remMin);
     $('.fill-min1')[0].innerText=remMin
     $('.fill-sec1')[0].innerText=remSec
-    gap2--;
 }
 

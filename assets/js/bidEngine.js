@@ -38,14 +38,36 @@ class BidEngine{
             else
                 logContainer.append(`<li> ${data.user_name}&nbsp;&nbsp;JOINED </li>`)
         })
-        
+        self.socket.on("bidded",function(data){
+            $('.dot').toggleClass('red');
+            $('.dot').toggleClass('green');
+            if(data.user_email==self.userEmail)
+            {
+                $('.dot').removeClass('red');
+                $('.dot').addClass('green');
+
+                logContainer.append(`<li> YOU&nbsp;&nbsp;BIDDED </li>`)
+            }
+            else
+            {
+                $('.dot').removeClass('green');
+                $('.dot').addClass('red');
+                
+                logContainer.append(`<li> ${data.user_name}&nbsp;&nbsp;BIDDED</li>`)
+            }
+                
+            
+            curr_bid_value[0].innerText=`${data.value}`
+
+        })
         $('#bid_button').click(function(e){
             e.preventDefault();
             // console.log(e);
             let bidValue=$('#bid_input')[0].value;
             console.log(bidValue);
-
+            $('#bid_input')[0].value="";
             // now i can peacefully make an ajax request
+            console.log("button clicked");
 
             $.ajax({
                 url:`/bidraise?bidId=${self.bidRoomId}`,
@@ -54,24 +76,28 @@ class BidEngine{
                 success:function(data){
                     console.log(data);
                     // console.log(curr_bid_value);
-                    
+                    console.log("in success");
                     // so the curr_user rn is the highest bidder
-                    self.socket.emit('placedbid',{
-                        user_name:self.username,
-                        user_email:self.userEmail,
-                        value:bidValue,
-                        room:self.bidRoomId
-                    })
-
-                    self.socket.on("bidded",function(data){
-                        if(data.user_email==self.userEmail)
-                            logContainer.append(`<li> YOU&nbsp;&nbsp;BIDDED </li>`)
-                        else
-                            logContainer.append(`<li> ${data.user_name}&nbsp;&nbsp;BIDDED</li>`)
+                    if(data.bid)
+                    {
+                       
                         
-                        curr_bid_value[0].innerText=`${data.value}`
 
-                    })
+                        self.socket.emit('placedbid',{
+                            user_name:self.username,
+                            user_email:self.userEmail,
+                            value:bidValue,
+                            room:self.bidRoomId
+                        })
+    
+                        
+                    }
+                    else
+                    {
+                        // this will not be given to every user in the room but to the client user only
+                        logContainer.append(`<li style="color:#fc2642"> ${data.message} </li>`)
+                    }
+                    
                 }
             })
 
