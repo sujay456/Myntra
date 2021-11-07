@@ -28,7 +28,11 @@ module.exports.home = async (req, res) => {
             let i=6
             for(let i=6;i<=8;++i)
             {
+<<<<<<< HEAD
                 await Bidding.create({product:productDB[i].id,bidding_time:3,base_bid:productDB[i].price/10,curr_max_bid:parseInt( productDB[i].price/10),start_time:"Sat Nov 06 2021 14:11:00",end_time:"Sat Nov 06 2021 14:30:00",closed:false})
+=======
+                await Bidding.create({product:productDB[i].id,bidding_time:3,base_bid:productDB[i].price/10,curr_max_bid:parseInt( productDB[i].price/10),start_time:"Thu Nov 05 2021 12:57:00",end_time:"Sun Nov 07 2021 10:00:00",closed:false})
+>>>>>>> 225f14c53669fde2649f1555e95df084c4286d98
             }
         }
         bproducts=await Bidding.find({}).populate('product');
@@ -275,13 +279,13 @@ module.exports.BuyFromCart=async (req,res)=>{
 module.exports.bidding_page=async (req,res)=>{
 
     try {
-        
+        // console.log(req);
         bid_product=await Bidding.findById(req.query.id).populate('product');
-        console.log(bid_product);
+        //console.log("Bid Product :",bid_product);
         let f=new Date(bid_product.end_time).getTime()
         let c=new Date().getTime();
         let gap=f-c;
-        console.log(gap)
+        //console.log(gap)
         if(gap<=0)
         {
             bid_product.closed=true;
@@ -292,7 +296,7 @@ module.exports.bidding_page=async (req,res)=>{
         bid_product.save();
         // check whether bid is over or not
         // console.log(bid_product);
-        return res.render('bidding_page',{bp:bid_product})
+        return res.render('bidding_page2',{bp:bid_product})
     } catch (error) {
         
         console.log("Error in rendering bidding page",error);
@@ -301,7 +305,7 @@ module.exports.bidding_page=async (req,res)=>{
 
 module.exports.bidRaise=async (req,res)=>{
 
-    // console.log(req.body.value)
+    console.log(req.body.value)
     let bidP=await Bidding.findById(req.query.bidId)
     // console.log(bidP);
     let user=await User.findById(req.user.id);

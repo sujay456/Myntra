@@ -4,16 +4,12 @@
 <link rel="stylesheet" href="css/bidding.css">
 <section class="bidding">
     
-<div class="bidding_container" >
+<div class="bidding_container">
     <div class="Product-details inner_container">
         <h3>
             <%=bp.product.name%>
-    
         </h3>
-        
-        <img src="images/<%=bp.product.image%>" alt="product image" width="200px" >
-    
-        
+        <img src="images/<%=bp.product.image%>" alt="product image" width="200px">
     </div>
     
     <% if(!bp.closed) {%>
@@ -33,8 +29,6 @@
         <div class="times">
             <div class="min tc"><h5>Minutes</h5><h6 class="fill-min1"></h6> </div>
             <div class="sec tc"><h5>Second</h5> <h6 class="fill-sec1"></h6></div>
-            
-
         </div>
         <h4>Curr bid : <span id="curr_bid_value"><%=bp.curr_max_bid%></span></h1>
 

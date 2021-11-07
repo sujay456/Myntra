@@ -1,7 +1,7 @@
 var logContainer=$('.logs')
 var curr_bid_value=$("#curr_bid_value");
 // console.log("hello in bid")
-class BidEngine{
+class BidEngine{ 
     constructor(bidRoomId,userEmail,username)
     {
         this.bidRoomId=bidRoomId;
@@ -34,9 +34,9 @@ class BidEngine{
 
         self.socket.on("user_joined",function(data){
             if(data.user_email==self.userEmail)
-                logContainer.append(`<li> You joined </li>`)
+                logContainer.append(`<li> YOU&nbsp;&nbsp;JOINED </li>`)
             else
-                logContainer.append(`<li> ${data.user_name} joined </li>`)
+                logContainer.append(`<li> ${data.user_name}&nbsp;&nbsp;JOINED </li>`)
         })
         
         $('#bid_button').click(function(e){
@@ -65,9 +65,9 @@ class BidEngine{
 
                     self.socket.on("bidded",function(data){
                         if(data.user_email==self.userEmail)
-                            logContainer.append(`<li> You bidded </li>`)
+                            logContainer.append(`<li> YOU&nbsp;&nbsp;BIDDED </li>`)
                         else
-                            logContainer.append(`<li> ${data.user_name} bidded</li>`)
+                            logContainer.append(`<li> ${data.user_name}&nbsp;&nbsp;BIDDED</li>`)
                         
                         curr_bid_value[0].innerText=`${data.value}`
 
