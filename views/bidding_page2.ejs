@@ -1,10 +1,10 @@
-<link rel="stylesheet" href="css/bidding2.css">
 <link rel="stylesheet" href="plugins/themefisher-font/style.css">
   <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="plugins/animate/animate.css">
   <link rel="stylesheet" href="plugins/slick/slick.css">
   <link rel="stylesheet" href="plugins/slick/slick-theme.css">
-<section class="single-product">
+  <link rel="stylesheet" href="css/bidding2.css">
+  <section class="single-product">
     <% if(!bp.closed) {%>
     <div class="row mt-20">
         <div class="col-md-5">
@@ -72,7 +72,7 @@
             </div>
         </div>
         <div class="col-md-7">
-            <div class="single-product-details">
+            <div class="single-product-details"> 
                 <h2><%= bp.product.name %></h2>
                 <p class="product-description mt-20">
                     <%= bp.product.Desc %>
@@ -89,19 +89,46 @@
                 
                 
                 <h4 class="product-price">Maximum Bid : <%=bp.curr_max_bid%>&nbsp;<i class="fas fa-coins" style="color: rgb(255, 174, 0);"></i></h4>
-                <div class="bid-input-info">
-                    <form action="" data-link="/bidraise" >
-                        <div class="product-quantity">
-                            <div class="product-quantity-slider">
-                                <input id="product-quantity" type="text" value="0" name="product-quantity">
-                            </div>
-                        </div> 
-                        <input type="submit" name="" id="bid_button" class="btn btn-main mt-20" value="raise bid">
-                    </form>
+                <!-- <div class="bidding-details inner_container after-time" data-end="<%=bp.end_time%>" data-id="<%=bp.id%>" >
+                    <h5>Time Left:</h5>
+                    <div class="times">
+                        <div class="min tc"><h5>Minutes</h5><h6 class="fill-min1"></h6> </div>
+                        <div class="sec tc"><h5>Second</h5> <h6 class="fill-sec1"></h6></div>
+                    </div>
+                    <h4>Curr bid : <span id="curr_bid_value"><%=bp.curr_max_bid%></span></h1>
+            
+                    <button type="button">Place bid</button>
+                    
+                    ye wallah div upar se urta hua ayega screen pe starting pe nhi rahega
+                    <div>
+                        <form action="" data-link="/bidraise" >
+                            <input type="number" name="bid" value="1001" id="bid_input" >
+                            <input type="submit" name="" id="bid_button" value="raise bid">
+                        </form>
+                    </div>
+                </div> -->
+                <button type="button" class="btn btn-main mt-20 place-bid-button">
+                    PLACE BID
+                </button>
+                <div id="complete-bid-form" class="bidding-details inner_container after-time bid-form" data-end="<%=bp.end_time%>" data-id="<%=bp.id%>" >
+                    <div class="bid-input-info">
+                        <form action="" data-link="/bidraise" >
+                            <input id="bid_input" class="bid-value-input" type="number" value="0" name="bid">
+                            <input type="submit" name="" id="bid_button" class="btn btn-main mt-20" value="raise bid">
+                        </form>
+                    </div>
                 </div>
             </div>
         </div> 
     </div>
+    <div class="users-details inner_container after-time">
+        <h3>currently</h3>
+        <div class="log-container">
+            <ul class="logs">
+                <!-- <li>Hello</li> -->
+            </ul>
+        </div>
+    </div> 
     <div class="row">
         <div class="col-xs-12">
             <div class="tabCommon mt-20">
@@ -214,4 +241,14 @@
     <script src="plugins/slick/slick-animation.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw"></script>
     <script type="text/javascript" src="plugins/google-map/gmap.js"></script>
-    <script src="js/bidding_2.js"></script>
+    
+<script src="https://cdn.socket.io/4.3.2/socket.io.min.js" integrity="sha384-KAZ4DtjNhLChOB/hxXuKqhMLYvx3b5MlT55xPEiNmREKRzeEm+RVPlTnAn0ajQNs" crossorigin="anonymous"></script>
+<script src="js/bidEngine.js"></script>
+<script src="js/time.js"></script>
+<script src="js/bidding_2.js"></script>
+<%if(locals.user) { %>
+<script>
+    new BidEngine("<%=bp.id%>","<%=user.email%>","<%=user.name%>")
+</script>
+
+<%}%>
