@@ -308,13 +308,15 @@ module.exports.bidRaise=async (req,res)=>{
     if(bidP.curr_max_bid>=req.body.value)
     {
         // i am sorry babu
-        return res.status(403).json({
+        return res.status(200).json({
+            bid:false,
             message:"Your bid Value is less than the current max value"
         })
     }
     else if(user.points<req.body.value)
     {
-        return res.status(403).json({
+        return res.status(200).json({
+            bid:false,
             message:"You don't have enough coins"
         })
     }
@@ -330,7 +332,8 @@ module.exports.bidRaise=async (req,res)=>{
 
     return res.status(200).json({
         message:"Successfully placed the bid",
-        rem_point:user.points
+        rem_point:user.points,
+        bid:true
         
     })
 }
