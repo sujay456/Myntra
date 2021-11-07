@@ -1,3 +1,4 @@
+
 .single-product { 
   padding: 0px 80px 60px;
 }
@@ -275,7 +276,8 @@
  
 .users-details {
   position: fixed;
-  top:600px;
+  /* top:600px; */
+  bottom: 10px;
   right: 0;
   overflow: hidden;
   width: 300px;
@@ -307,7 +309,7 @@
 .not-started-yet
 {
     /* border: 1px solid black; */
-    width: 50%;
+    width: 100%;
     /* padding: 10px; */
     box-sizing: border-box;
 }
@@ -315,7 +317,8 @@
 .tc
 {
   display: inline;
-  color: red;
+  /* color: red; */
+  font-weight: bolder;
   font-size: 1.5rem;
 }
 
@@ -325,4 +328,34 @@
     justify-content: space-around;
     align-items: center;
 
+}
+.signify
+{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid black;
+  display: inline-block;
+  margin-left: 10px;
+}
+.dot{
+  width: 12px;
+  height: 12px;
+  background-color: black;
+  border-radius: 50%;
+  text-align: center;
+  position: relative;
+  top: 3px;
+  left: 2.5px;
+  transition: color 0.2s ease-in;
+}
+
+.green{
+  background-color: green;
+  border: 1px solid geen;
+}
+
+.red{
+  background-color: red;
+  border:1px solid red;
 }

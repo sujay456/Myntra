@@ -1,11 +1,34 @@
 <link rel="stylesheet" href="css/winner.css">
 <div class="winner-container">
-    <img class="image-1" src="images/winner-1.png">
-    <h2><%=winnerName%> has won the bid</h2>
+    <%if (user.id==winnerName.id) {%>
+        <img class="image-1" src="images/winner-1.png">
+
+        
+        <h2>Congratulations You have won the bid</h2>
+        <a href="/confirm">
+            <button class="btn btn-main mt-20">
+                Redeem Your Product
+            </button>
+        </a>
+        
+        <a href="/">
+            <button class="btn btn-main mt-20">
+                HOME PAGE
+            </button>
+        </a>
+
+        <img class="image-2" src="images/winner-1.png">
+    <%}else{%>
+        <img class="image-1" src="images/winner-1.png">
+
+        <h2><%=winnerName.name%> has won the bid</h2>
     <a href="/">
         <button class="btn btn-main mt-20">
             HOME PAGE
         </button>
     </a>
     <img class="image-2" src="images/winner-1.png">
+    
+    <%}%>
+    
 </div>

@@ -11,6 +11,7 @@ module.exports.bidSocket=function(socketServer)
         console.log("New connection",socket.id);
 
         socket.on('disconnect',function(){
+            
             console.log("disconnected");
         })
         

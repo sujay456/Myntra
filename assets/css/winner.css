@@ -14,7 +14,7 @@
 
 .winner-container .image-1{
     position: fixed;
-    left: 20%;
+    left: 15%;
     top: 28%;
 }
 
@@ -22,5 +22,5 @@
     position: fixed;
     transform: rotate(270deg);
     top:28%;
-    right: 20%;
+    right: 15%;
 }

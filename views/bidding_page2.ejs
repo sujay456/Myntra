@@ -47,25 +47,25 @@
                     <!-- thumb -->
                     <ol class='carousel-indicators mCustomScrollbar meartlab'>
                         <li data-target='#carousel-custom' data-slide-to='0' class='active'>
-                            <img src='images/shop/single-products/product-1.jpg' alt='' />
+                            <img src='images/product-1.jpg' alt='' />
                         </li>
                         <li data-target='#carousel-custom' data-slide-to='1'>
-                            <img src='images/shop/single-products/product-2.jpg' alt='' />
+                            <img src='images/product-2.jpg' alt='' />
                         </li>
                         <li data-target='#carousel-custom' data-slide-to='2'>
-                            <img src='images/shop/single-products/product-3.jpg' alt='' />
+                            <img src='images/product-3.jpg' alt='' />
                         </li>
                         <li data-target='#carousel-custom' data-slide-to='3'>
-                            <img src='images/shop/single-products/product-4.jpg' alt='' />
+                            <img src='images/product-4.jpg' alt='' />
                         </li>
                         <li data-target='#carousel-custom' data-slide-to='4'>
-                            <img src='images/shop/single-products/product-5.jpg' alt='' />
+                            <img src='images/product-5.jpg' alt='' />
                         </li>
                         <li data-target='#carousel-custom' data-slide-to='5'>
-                            <img src='images/shop/single-products/product-6.jpg' alt='' />
+                            <img src='images/product-6.jpg' alt='' />
                         </li>
                         <li data-target='#carousel-custom' data-slide-to='6'>
-                            <img src='images/shop/single-products/product-7.jpg' alt='' />
+                            <img src='images/product-7.jpg' alt='' />
                         </li>
                     </ol>
                 </div>
@@ -73,14 +73,35 @@
         </div>
         <div class="col-md-7">
             <div class="single-product-details"> 
-                <h2>
-                    <%= bp.product.name %>
-                    <div class="min tc">:<h6 class="fill-min1"></h6></div>
-                    <div class="sec tc"><h6 class="fill-sec1"></h6></div>
-                </h2>
+                <div style="display: flex; justify-content: space-between;">
+                    <div style="font-size: 2em; font-weight: bold;">
+                        <%= bp.product.name %>
+                        <div class="signify">
+                            <div class="dot red"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="times">
+                        <div class="min tc" style="padding: 10px; "><h4 style="font-weight: bold;">Minutes</h4><h3 style="text-align: right;" class="fill-min1"></h3> </div>
+                        <div class="sec tc"><h4 style="font-weight: bold;">Second</h4> <h3 class="fill-sec1" style="text-align: right;" ></h3></div>
+                    </div>
+                </div>
                 <p class="product-description mt-20">
                     <%= bp.product.Desc %>
                 </p>
+                <div class="not-started-yet inner_container" data-time="<%=bp.start_time%>" style="margin-top: 100px;">
+                    <h2>Bidding will start in </h2>
+                    <div class="times">
+                        <div class="day tc"><h3>Days</h3> <h5 style="font-weight: bold;" class="fill-day"></h6></div>
+                        <div class="hr tc"><h3>Hours</h3> <h5 class="fill-hr" style="font-weight: bold;"></h6> </div>
+                        <div class="min tc"><h3>Minutes</h3><h5 class="fill-min" style="font-weight: bold;"></h6> </div>
+                        <div class="sec tc"><h3>Second</h3> <h5 class="fill-sec" style="font-weight: bold;"></h6></div>
+                        
+            
+                    </div>
+                </div>
+                <div class="after-time" data-end="<%=bp.end_time%>" data-id="<%=bp.id%>">
+                    
                 <div class="product-size">
                     <h4>Size:</h4>
                     <select class="form-control" style="height:45px; margin-left: 20px;">
@@ -92,7 +113,7 @@
                 </div>
                 
                 
-                <h4 class="product-price">Maximum Bid : <%=bp.curr_max_bid%>&nbsp;<i class="fas fa-coins" style="color: rgb(255, 174, 0);"></i></h4>
+                <h4 class="product-price">Maximum Bid : <span id="curr_bid_value"><%=bp.curr_max_bid%></span>&nbsp;<i class="fas fa-coins" style="color: rgb(255, 174, 0);"></i></h4>
                 <!-- <div class="bidding-details inner_container after-time" data-end="<%=bp.end_time%>" data-id="<%=bp.id%>" >
                     <h5>Time Left:</h5>
                     <div class="times">
@@ -123,11 +144,12 @@
                     </div>
                 </div>
             </div>
+            </div>
         </div> 
     </div>
     <div class="users-details">
             <ul class="logs">
-                <!-- <li>Hello</li> --> 
+                <!-- <li>Hello</li>  -->
             </ul>
     </div> 
     <div class="row">
@@ -150,7 +172,7 @@
                                 <li class="media">
 
                                     <a class="pull-left" href="#!">
-                                        <img class="media-object comment-avatar" src="images/blog/avater-1.jpg" alt="" width="50" height="50" />
+                                        <img class="media-object comment-avatar" src="" alt="" width="50" height="50" />
                                     </a>
 
                                     <div class="media-body">
@@ -175,7 +197,7 @@
                                 <li class="media">
 
                                     <a class="pull-left" href="#!">
-                                        <img class="media-object comment-avatar" src="images/blog/avater-4.jpg" alt="" width="50" height="50" />
+                                        <img class="media-object comment-avatar" src="" alt="" width="50" height="50" />
                                     </a>
 
                                     <div class="media-body">
@@ -201,7 +223,7 @@
                                 <li class="media">
 
                                     <a class="pull-left" href="#!">
-                                        <img class="media-object comment-avatar" src="images/blog/avater-1.jpg" alt="" width="50" height="50">
+                                        <img class="media-object comment-avatar" src="" alt="" width="50" height="50">
                                     </a>
 
                                     <div class="media-body">
@@ -239,6 +261,7 @@
             </a>
         </div>
         <%}%>
+
 </section>
 
 <script src="plugins/jquery/dist/jquery.min.js"></script>
