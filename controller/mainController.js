@@ -276,7 +276,7 @@ module.exports.bidding_page=async (req,res)=>{
 
     try {
         // console.log(req);
-        bid_product=await Bidding.findById(req.query.id).populate('product');
+        bid_product=await Bidding.findById(req.query.id).populate('product curr_winning_user');
         //console.log("Bid Product :",bid_product);
         let f=new Date(bid_product.end_time).getTime()
         let c=new Date().getTime();

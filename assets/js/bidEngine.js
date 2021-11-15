@@ -1,13 +1,24 @@
 var logContainer=$('.logs')
 var curr_bid_value=$("#curr_bid_value");
+// var Plotly=require('plotly.js-dist-min')
 // console.log("hello in bid")
 class BidEngine{ 
-    constructor(bidRoomId,userEmail,username)
+    constructor(bidRoomId,userEmail,username,curr_bid,r_u_winning_son)
     {
         this.bidRoomId=bidRoomId;
         this.userEmail=userEmail;
         this.username=username;
-
+        let recent_bid="system";
+        if(r_u_winning_son)
+            recent_bid=r_u_winning_son
+        Plotly.newPlot('chart',[{
+            y:[curr_bid],
+            type:'line',
+            text:[recent_bid],
+            mode:'lines+markers',
+            
+            // fill:'tonext'
+        }],{width:1000,height:500})
         this.socket=io.connect('http://localhost:80');
         console.log(this.userEmail)
         if(this.userEmail)
@@ -55,6 +66,12 @@ class BidEngine{
                 
                 logContainer.append(`<li> ${data.user_name}&nbsp;&nbsp;BIDDED</li>`)
             }
+
+            Plotly.extendTraces('chart',{
+                y:[[data.value]],
+                text:[[data.user_name]],
+                
+            },[0]);
                 
             
             curr_bid_value[0].innerText=`${data.value}`
@@ -105,3 +122,23 @@ class BidEngine{
 
     }
 };
+
+function getData(){
+    return Math.random();
+}
+
+
+var c=0;
+// setInterval(function(){
+    
+//     c++;
+
+//     if(c>100)
+//     {
+//         Plotly.relayout('chart',{
+//             xaxis:{
+//                 range:[c-100,c]
+//             }
+//         })
+//     }
+// },200)

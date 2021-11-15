@@ -10,6 +10,7 @@ const passportLocal = require('./config/passport');
 const Mongostore=require('connect-mongodb-session')(session)
 const passportGoogle=require('./config/passport-google');
 var bodyParser = require('body-parser');
+
 const bidServer=require('http').Server(app);
 const bidsocket=require('./config/socket').bidSocket(bidServer);
 bidServer.listen(80);
