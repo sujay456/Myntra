@@ -23,6 +23,8 @@
     "passport": "^0.5.0",
     "passport-google-oauth": "^2.0.0",
     "passport-local": "^1.0.0",
+    "plotly.js-dist": "^2.6.3",
+    "plotly.js-dist-min": "^2.6.3",
     "socket.io": "^4.3.1"
   }
 }
