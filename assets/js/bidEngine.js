@@ -19,7 +19,7 @@ class BidEngine{
             
         //     // fill:'tonext'
         // }],{width:1000,height:500})
-        this.socket=io.connect('http://localhost:80');
+        this.socket=io.connect('http://localhost:4433');
         console.log(this.userEmail)
         if(this.userEmail)
         {

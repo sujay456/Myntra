@@ -14,7 +14,7 @@ var bodyParser = require('body-parser');
 
 const bidServer=require('http').Server(app);
 const bidsocket=require('./config/socket').bidSocket(bidServer);
-bidServer.listen(80);
+bidServer.listen(4433);
 // this is a comment by sujay
 // this is a comment by gaurav
 // this is a comment by sujay
