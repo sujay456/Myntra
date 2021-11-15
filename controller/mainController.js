@@ -28,7 +28,7 @@ module.exports.home = async (req, res) => {
             let i=6
             for(let i=6;i<=8;++i)
             {
-                await Bidding.create({product:productDB[i].id,bidding_time:3,base_bid:productDB[i].price/10,curr_max_bid:parseInt( productDB[i].price/10),start_time:"Sun Nov 07 2021 12:20:00",end_time:"Sun Nov 07 2021 16:00:00",closed:false})
+                await Bidding.create({product:productDB[i].id,bidding_time:3,base_bid:productDB[i].price/10,curr_max_bid:parseInt( productDB[i].price/10),start_time:"Sat Nov 13 2021 12:05:00",end_time:"Mon Nov 15 2021 12:40:00",closed:false})
             }
         }
         bproducts=await Bidding.find({}).populate('product');
@@ -89,7 +89,7 @@ module.exports.cart = async (req, res) => {
 }
 module.exports.confirmation=async (req,res)=>{
     try {
-        
+        // console.log("here");
         return res.render('confirmation');
     } catch (error) {
         console.log("Error in confirmation",error);
@@ -310,7 +310,7 @@ module.exports.bidRaise=async (req,res)=>{
         // i am sorry babu
         return res.status(200).json({
             bid:false,
-            message:"Place a Legal Bid "
+            message:"Your bid Value is less than the current max value"
         })
     }
     else if(user.points<req.body.value)
@@ -332,8 +332,8 @@ module.exports.bidRaise=async (req,res)=>{
 
     return res.status(200).json({
         message:"Successfully placed the bid",
-        bid:true,
-        rem_point:user.points
+        rem_point:user.points,
+        bid:true
         
     })
 }
