@@ -354,8 +354,10 @@ module.exports.bidcloser=async (req,res)=>{
         if(bid.curr_winning_user)
         {
             let user=await User.findById(bid.curr_winning_user);
-
-            user.points-=bid.curr_max_bid;
+            if(req.user.id==bid.curr_winning_user){
+                user.points-=bid.curr_max_bid;
+            }
+           
             user.save();
             return res.status(200).json({
                 winner:true,
