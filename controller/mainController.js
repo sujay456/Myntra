@@ -310,7 +310,7 @@ module.exports.bidRaise=async (req,res)=>{
         // i am sorry babu
         return res.status(200).json({
             bid:false,
-            message:"Your bid Value is less than the current max value"
+            message:"Place a Legal Bid"
         })
     }
     else if(user.points<req.body.value)
