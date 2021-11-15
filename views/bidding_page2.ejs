@@ -286,7 +286,8 @@
 <script src="js/bidding_2.js"></script>
 <%if(locals.user) { %>
 <script>
-    new BidEngine("<%=bp.id%>","<%=user.email%>","<%=user.name%>","<%=bp.curr_max_bid%>","<%=bp.curr_winning_user.name%>")
+    // console.log(bp.id);
+    new BidEngine("<%=bp.id%>","<%=user.email%>","<%=user.name%>","<%=bp.curr_max_bid%>")
 
 </script>
 

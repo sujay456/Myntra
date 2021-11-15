@@ -1,4 +1,5 @@
 const express = require('express');
+const env=require('./config/environment');
 const app = express();
 const expressLayouts = require('express-ejs-layouts');
 const path = require('path');
@@ -26,8 +27,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressLayouts)
 app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);
-
-app.use(express.static(path.join(__dirname, '/assets')));
+app.use(express.static(path.join(__dirname,env.asset_path )));
 app.use('/css', express.static(path.join(__dirname, "node_modules/mdb-ui-kit/css")));
 app.use('/js', express.static(path.join(__dirname, "node_modules/mdb-ui-kit/js")));
 
@@ -39,7 +39,7 @@ app.set('views', './views');
 app.use(session(
     {
         name: 'myntra',
-        secret: 'GauravisProCoder',
+        secret: env.session_key_secret,
         saveUninitialized: false,
         resave: true,
         cookie: {
