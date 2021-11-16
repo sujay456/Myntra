@@ -132,6 +132,36 @@
                         </form>
                     </div>
                 </div> --> 
+                <button type="button" class="btn btn-main mt-20 view-rules" data-toggle="modal" data-target="#exampleModalCenter">
+                    BIDDING RULES
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h3 class="modal-title" id="exampleModalLongTitle">Bidding Rules</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                            1. You can only place a <strong>legal bid.</strong><br>
+                                &emsp;&ensp;&nbsp;Legal bid : <br> 
+                                &emsp;&emsp;1. It should be greater than previously placed maximum bid. <br>
+                                &emsp;&emsp;2. You must have coins greater than your bid value.  <br>
+                            2. You can place bid any number of times before time ends. <br>
+                            3. User with maximum bid will be declared winner. <br>
+                            4. Winner will be able to redeem product once the bidding ends. <br>  
+                            5. Coins will be deducted automatically from the winners account.   <br>                      
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">I Agree</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
                 <button type="button" class="btn btn-main mt-20 place-bid-button">
                     PLACE BID
                 </button>

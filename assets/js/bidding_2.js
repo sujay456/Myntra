@@ -18,5 +18,9 @@
       $("#complete-bid-form").removeClass("display-none");
       $('.place-bid-button').addClass("display-none");
     });
+
+    $('#myModal').on('shown.bs.modal', function () {
+      $('#myInput').trigger('focus')
+    })
   
   })(jQuery);
