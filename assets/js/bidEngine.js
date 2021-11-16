@@ -8,17 +8,8 @@ class BidEngine{
         this.bidRoomId=bidRoomId;
         this.userEmail=userEmail;
         this.username=username;
-        let recent_bid="system";
-        // if(r_u_winning_son)
-        //     recent_bid=r_u_winning_son
-        // Plotly.newPlot('chart',[{
-        //     y:[curr_bid],
-        //     type:'line',
-        //     text:[recent_bid],
-        //     mode:'lines+markers',
-            
-        //     // fill:'tonext'
-        // }],{width:1000,height:500})
+        
+        
         this.socket=io.connect('http://13.232.132.3:4433');
         console.log(this.userEmail)
         if(this.userEmail)

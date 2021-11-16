@@ -28,14 +28,13 @@ module.exports.home = async (req, res) => {
             let i=6
             for(let i=6;i<=8;++i)
             {
-                await Bidding.create({product:productDB[i].id,bidding_time:3,base_bid:productDB[i].price/10,curr_max_bid:parseInt( productDB[i].price/10),start_time:"Sat Nov 13 2021 12:05:00",end_time:"Mon Nov 15 2021 15:20:00",closed:false})
+                await Bidding.create({product:productDB[i].id,bidding_time:3,base_bid:productDB[i].price/10,curr_max_bid:parseInt( productDB[i].price/10),start_time:"Mon Nov 15 2021 16:49:00",end_time:"Mon Nov 16 2021 23:30:00",closed:false})
             }
         }
         bproducts=await Bidding.find({}).populate('product');
         return res.render('home2', { products: productDB,bproducts:bproducts });
     } catch (error) {
         console.log(error);
-
     }   
 
 }
@@ -347,7 +346,7 @@ module.exports.bidcloser=async (req,res)=>{
 
     if(bid)
     {
-
+       
         bid.closed=true;
         bid.save();
 
@@ -357,7 +356,7 @@ module.exports.bidcloser=async (req,res)=>{
             if(req.user.id==bid.curr_winning_user){
                 user.points-=bid.curr_max_bid;
             }
-           
+            
             user.save();
             return res.status(200).json({
                 winner:true,
@@ -403,3 +402,27 @@ module.exports.winner=async (req,res)=>{
         cartP:cartP
     })
 }
+
+module.exports.GetDetails=async (req,res)=>{
+
+    try {
+        
+        let user=await User.findById(req.query.id);
+
+        if(user)
+        {
+            return res.status(200).json({
+                name:user.name
+            })
+        }
+        else
+        {
+            console.log("User not Found");
+
+            return res.redirec('/');
+        }
+
+    } catch (error) {
+        console.log("Error in getting details for bidding display",error);
+    }
+} 
