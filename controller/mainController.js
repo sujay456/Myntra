@@ -35,7 +35,6 @@ module.exports.home = async (req, res) => {
         return res.render('home2', { products: productDB,bproducts:bproducts });
     } catch (error) {
         console.log(error);
-
     }   
 
 }
@@ -276,7 +275,7 @@ module.exports.bidding_page=async (req,res)=>{
 
     try {
         // console.log(req);
-        bid_product=await Bidding.findById(req.query.id).populate('product');
+        bid_product=await Bidding.findById(req.query.id).populate('product curr_winning_user');
         //console.log("Bid Product :",bid_product);
         let f=new Date(bid_product.end_time).getTime()
         let c=new Date().getTime();
@@ -310,7 +309,7 @@ module.exports.bidRaise=async (req,res)=>{
         // i am sorry babu
         return res.status(200).json({
             bid:false,
-            message:"Your bid Value is less than the current max value"
+            message:"Place a Legal Bid"
         })
     }
     else if(user.points<req.body.value)
@@ -347,15 +346,17 @@ module.exports.bidcloser=async (req,res)=>{
 
     if(bid)
     {
-
+       
         bid.closed=true;
         bid.save();
 
         if(bid.curr_winning_user == req.user.id)
         {
             let user=await User.findById(bid.curr_winning_user);
-
-            user.points-=bid.curr_max_bid;
+            if(req.user.id==bid.curr_winning_user){
+                user.points-=bid.curr_max_bid;
+            }
+            
             user.save();
             return res.status(200).json({
                 winner:true,
@@ -401,3 +402,27 @@ module.exports.winner=async (req,res)=>{
         cartP:cartP
     })
 }
+
+module.exports.GetDetails=async (req,res)=>{
+
+    try {
+        
+        let user=await User.findById(req.query.id);
+
+        if(user)
+        {
+            return res.status(200).json({
+                name:user.name
+            })
+        }
+        else
+        {
+            console.log("User not Found");
+
+            return res.redirec('/');
+        }
+
+    } catch (error) {
+        console.log("Error in getting details for bidding display",error);
+    }
+} 

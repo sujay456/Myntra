@@ -23,6 +23,8 @@ router.post('/register', mainController.create);
 router.get('/bidClose',mainController.bidcloser)
 router.get('/shop',mainController.shop);
 
+router.get('/getDetails',passport.CheckAuth,mainController.GetDetails)
+
 router.get('/checkout',passport.CheckAuth,mainController.checkout);
 
 router.get('/confirm',passport.CheckAuth,mainController.confirmation);
