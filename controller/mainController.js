@@ -28,7 +28,7 @@ module.exports.home = async (req, res) => {
             let i=6
             for(let i=6;i<=8;++i)
             {
-                await Bidding.create({product:productDB[i].id,bidding_time:3,base_bid:productDB[i].price/10,curr_max_bid:parseInt( productDB[i].price/10),start_time:"Tue Nov 16 2021 12:05:00",end_time:"Tue Nov 17 2021 01:50:00",closed:false})
+                await Bidding.create({product:productDB[i].id,bidding_time:3,base_bid:productDB[i].price/10,curr_max_bid:parseInt( productDB[i].price/10),start_time:"Tue Nov 16 2021 12:05:00",end_time:"Tue Nov 17 2021 16:20:00",closed:false})
             }
         }
         bproducts=await Bidding.find({}).populate('product');
